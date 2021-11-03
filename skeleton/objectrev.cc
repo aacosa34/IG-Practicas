@@ -77,7 +77,7 @@ void _objectrev::crearRevolucion(vector<_vertex3f> perfil, int Faces)
 
         Triangles[n++] = triangulo;
     }
-
+//
 }
 
 
