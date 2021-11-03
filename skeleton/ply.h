@@ -10,7 +10,7 @@ class _ply:public _object3D
 private:
     _file_ply archivo;
 public:
-    _ply(const string &File_name="/home/adrian/Documentos/IG/ply_models/beethoven.ply");
+    _ply(const string &File_name="../ply_models/beethoven.ply");
 };
 
 #endif // _PLY_H

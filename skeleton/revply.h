@@ -1,10 +1,10 @@
 #ifndef _REVPLY_H
 #define _REVPLY_H
 
-#include "object3d.h"
+#include "objectrev.h"
 #include "file_ply_stl.h"
 
-class _revply
+class _revply:public _objectrev
 {
 private:
     _file_ply archivo;

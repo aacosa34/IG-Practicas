@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = esqueleto_qt1.0.0
-DISTDIR = /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/.tmp/esqueleto_qt1.0.0
+DISTDIR = /home/adrian/Escritorio/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/.tmp/esqueleto_qt1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/adrian/Qt/5.12.5/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 /home/adrian/Qt/5.12.5/gcc_64/lib/libQt5Widgets.so /home/adrian/Qt/5.12.5/gcc_64/lib/libQt5Gui.so /home/adrian/Qt/5.12.5/gcc_64/lib/libQt5Core.so -lGL -lpthread   
@@ -893,7 +893,7 @@ moc_glwidget.cpp: ../skeleton/glwidget.h \
 		../skeleton/file_ply_stl.h \
 		moc_predefs.h \
 		../../../Qt/5.12.5/gcc_64/bin/moc
-	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Documentos/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
+	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Escritorio/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Escritorio/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
 
 moc_window.cpp: ../skeleton/window.h \
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
@@ -1024,7 +1024,7 @@ moc_window.cpp: ../skeleton/window.h \
 		../../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
 		moc_predefs.h \
 		../../../Qt/5.12.5/gcc_64/bin/moc
-	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Documentos/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/window.h -o moc_window.cpp
+	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Escritorio/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Escritorio/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/window.h -o moc_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1125,7 +1125,15 @@ ply.o: ../skeleton/ply.cc ../skeleton/ply.h \
 		../skeleton/file_ply_stl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ply.o ../skeleton/ply.cc
 
-revply.o: ../skeleton/revply.cc ../skeleton/revply.h
+revply.o: ../skeleton/revply.cc ../skeleton/revply.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h \
+		../skeleton/file_ply_stl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o revply.o ../skeleton/revply.cc
 
 sphere.o: ../skeleton/sphere.cc ../skeleton/sphere.h \
