@@ -5,6 +5,7 @@ HEADERS += \
   cube.h \
   cylinder.h \
   file_ply_stl.h \
+  hierarchical.h \
   object3d.h \
   axis.h \
   objectrev.h \
@@ -22,6 +23,7 @@ SOURCES += \
   cube.cc \
   cylinder.cc \
   file_ply_stl.cc \
+  hierarchical.cc \
   object3d.cc \
   axis.cc \
   objectrev.cc \
