@@ -44,6 +44,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_4:Object=OBJECT_CYLINDER;break;
   case Qt::Key_5:Object=OBJECT_SPHERE;break;
   case Qt::Key_6:Object=OBJECT_PLY;break;
+  case Qt::Key_7:Object=OBJECT_HIERARCHICAL;break;
 
   case Qt::Key_P:Draw_point=!Draw_point;break;
   case Qt::Key_L:Draw_line=!Draw_line;break;
@@ -134,6 +135,7 @@ void _gl_widget::draw_objects()
     case OBJECT_CYLINDER:Cylinder.draw_point();break;
     case OBJECT_SPHERE:Sphere.draw_point();break;
     case OBJECT_PLY:Ply.draw_point();break;
+    case OBJECT_HIERARCHICAL:Modelo.draw_point();break;
     default:break;
     }
   }
@@ -148,6 +150,7 @@ void _gl_widget::draw_objects()
     case OBJECT_CYLINDER:Cylinder.draw_line();break;
     case OBJECT_SPHERE:Sphere.draw_line();break;
     case OBJECT_PLY:Ply.draw_line();break;
+    case OBJECT_HIERARCHICAL:Modelo.draw_line();break;
     default:break;
     }
   }
@@ -161,6 +164,7 @@ void _gl_widget::draw_objects()
     case OBJECT_CYLINDER:Cylinder.draw_fill();break;
     case OBJECT_SPHERE:Sphere.draw_fill();break;
     case OBJECT_PLY:Ply.draw_fill();break;
+    case OBJECT_HIERARCHICAL:Modelo.draw_fill();break;
     default:break;
     }
   }
@@ -173,6 +177,7 @@ void _gl_widget::draw_objects()
     case OBJECT_CYLINDER:Cylinder.draw_chess();break;
     case OBJECT_SPHERE:Sphere.draw_chess();break;
     case OBJECT_PLY:Ply.draw_chess();break;
+    case OBJECT_HIERARCHICAL:Modelo.draw_chess();break;
     default:break;
     }
   }
