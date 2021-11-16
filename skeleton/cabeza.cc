@@ -10,7 +10,7 @@ void _cabeza::draw_point(){}
 void _cabeza::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glScalef(1.5,0.4,1);
+    glScalef(4,3,4);
     Cubo.draw_line();
     glPopMatrix();
 }

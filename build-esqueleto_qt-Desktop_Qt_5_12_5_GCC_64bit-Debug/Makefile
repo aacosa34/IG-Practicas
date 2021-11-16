@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = esqueleto_qt1.0.0
-DISTDIR = /home/adrian/Escritorio/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/.tmp/esqueleto_qt1.0.0
+DISTDIR = /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/.tmp/esqueleto_qt1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/adrian/Qt/5.12.5/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 /home/adrian/Qt/5.12.5/gcc_64/lib/libQt5Widgets.so /home/adrian/Qt/5.12.5/gcc_64/lib/libQt5Gui.so /home/adrian/Qt/5.12.5/gcc_64/lib/libQt5Core.so -lGL -lpthread   
@@ -52,7 +52,9 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../skeleton/basic_object3d.cc \
+SOURCES       = ../skeleton/base.cc \
+		../skeleton/basic_object3d.cc \
+		../skeleton/cabeza.cc \
 		../skeleton/cone.cc \
 		../skeleton/cube.cc \
 		../skeleton/cylinder.cc \
@@ -68,7 +70,9 @@ SOURCES       = ../skeleton/basic_object3d.cc \
 		../skeleton/glwidget.cc \
 		../skeleton/window.cc moc_glwidget.cpp \
 		moc_window.cpp
-OBJECTS       = basic_object3d.o \
+OBJECTS       = base.o \
+		basic_object3d.o \
+		cabeza.o \
 		cone.o \
 		cube.o \
 		cylinder.o \
@@ -279,7 +283,9 @@ DIST          = ../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.12.5/gcc_64/mkspecs/features/exceptions.prf \
 		../../../Qt/5.12.5/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf \
-		../skeleton/esqueleto_qt.pro ../skeleton/colors.h \
+		../skeleton/esqueleto_qt.pro ../skeleton/base.h \
+		../skeleton/cabeza.h \
+		../skeleton/colors.h \
 		../skeleton/basic_object3d.h \
 		../skeleton/cone.h \
 		../skeleton/cube.h \
@@ -294,7 +300,9 @@ DIST          = ../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../skeleton/tetrahedron.h \
 		../skeleton/glwidget.h \
 		../skeleton/window.h \
-		GL/*.h ../skeleton/basic_object3d.cc \
+		GL/*.h ../skeleton/base.cc \
+		../skeleton/basic_object3d.cc \
+		../skeleton/cabeza.cc \
 		../skeleton/cone.cc \
 		../skeleton/cube.cc \
 		../skeleton/cylinder.cc \
@@ -726,8 +734,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../skeleton/colors.h ../skeleton/basic_object3d.h ../skeleton/cone.h ../skeleton/cube.h ../skeleton/cylinder.h ../skeleton/file_ply_stl.h ../skeleton/object3d.h ../skeleton/axis.h ../skeleton/objectrev.h ../skeleton/ply.h ../skeleton/revply.h ../skeleton/sphere.h ../skeleton/tetrahedron.h ../skeleton/glwidget.h ../skeleton/window.h GL/*.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../skeleton/basic_object3d.cc ../skeleton/cone.cc ../skeleton/cube.cc ../skeleton/cylinder.cc ../skeleton/file_ply_stl.cc ../skeleton/object3d.cc ../skeleton/axis.cc ../skeleton/objectrev.cc ../skeleton/ply.cc ../skeleton/revply.cc ../skeleton/sphere.cc ../skeleton/tetrahedron.cc ../skeleton/main.cc ../skeleton/glwidget.cc ../skeleton/window.cc $(DISTDIR)/
+	$(COPY_FILE) --parents ../skeleton/base.h ../skeleton/cabeza.h ../skeleton/colors.h ../skeleton/basic_object3d.h ../skeleton/cone.h ../skeleton/cube.h ../skeleton/cylinder.h ../skeleton/file_ply_stl.h ../skeleton/object3d.h ../skeleton/axis.h ../skeleton/objectrev.h ../skeleton/ply.h ../skeleton/revply.h ../skeleton/sphere.h ../skeleton/tetrahedron.h ../skeleton/glwidget.h ../skeleton/window.h GL/*.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../skeleton/base.cc ../skeleton/basic_object3d.cc ../skeleton/cabeza.cc ../skeleton/cone.cc ../skeleton/cube.cc ../skeleton/cylinder.cc ../skeleton/file_ply_stl.cc ../skeleton/object3d.cc ../skeleton/axis.cc ../skeleton/objectrev.cc ../skeleton/ply.cc ../skeleton/revply.cc ../skeleton/sphere.cc ../skeleton/tetrahedron.cc ../skeleton/main.cc ../skeleton/glwidget.cc ../skeleton/window.cc $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -891,9 +899,11 @@ moc_glwidget.cpp: ../skeleton/glwidget.h \
 		../skeleton/sphere.h \
 		../skeleton/ply.h \
 		../skeleton/file_ply_stl.h \
+		../skeleton/base.h \
+		../skeleton/cabeza.h \
 		moc_predefs.h \
 		../../../Qt/5.12.5/gcc_64/bin/moc
-	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Escritorio/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Escritorio/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
+	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Documentos/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
 
 moc_window.cpp: ../skeleton/window.h \
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
@@ -1024,7 +1034,7 @@ moc_window.cpp: ../skeleton/window.h \
 		../../../Qt/5.12.5/gcc_64/include/QtGui/qinputmethod.h \
 		moc_predefs.h \
 		../../../Qt/5.12.5/gcc_64/bin/moc
-	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Escritorio/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Escritorio/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/window.h -o moc_window.cpp
+	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Documentos/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/window.h -o moc_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1042,6 +1052,18 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
+base.o: ../skeleton/base.cc ../skeleton/base.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h \
+		../skeleton/cube.h \
+		../skeleton/cabeza.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o base.o ../skeleton/base.cc
+
 basic_object3d.o: ../skeleton/basic_object3d.cc ../skeleton/basic_object3d.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
@@ -1049,6 +1071,17 @@ basic_object3d.o: ../skeleton/basic_object3d.cc ../skeleton/basic_object3d.h \
 		../skeleton/colors.h \
 		../skeleton/vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o basic_object3d.o ../skeleton/basic_object3d.cc
+
+cabeza.o: ../skeleton/cabeza.cc ../skeleton/cabeza.h \
+		../skeleton/cube.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cabeza.o ../skeleton/cabeza.cc
 
 cone.o: ../skeleton/cone.cc ../skeleton/cone.h \
 		../skeleton/objectrev.h \
@@ -1126,6 +1159,7 @@ ply.o: ../skeleton/ply.cc ../skeleton/ply.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ply.o ../skeleton/ply.cc
 
 revply.o: ../skeleton/revply.cc ../skeleton/revply.h \
+		../skeleton/objectrev.h \
 		../skeleton/object3d.h \
 		../skeleton/basic_object3d.h \
 		../skeleton/GL/gl.h \
@@ -1420,6 +1454,8 @@ glwidget.o: ../skeleton/glwidget.cc ../skeleton/glwidget.h \
 		../skeleton/sphere.h \
 		../skeleton/ply.h \
 		../skeleton/file_ply_stl.h \
+		../skeleton/base.h \
+		../skeleton/cabeza.h \
 		../skeleton/window.h \
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1611,7 +1647,9 @@ window.o: ../skeleton/window.cc ../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApp
 		../skeleton/cone.h \
 		../skeleton/sphere.h \
 		../skeleton/ply.h \
-		../skeleton/file_ply_stl.h
+		../skeleton/file_ply_stl.h \
+		../skeleton/base.h \
+		../skeleton/cabeza.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o window.o ../skeleton/window.cc
 
 moc_glwidget.o: moc_glwidget.cpp 
