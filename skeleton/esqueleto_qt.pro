@@ -1,5 +1,6 @@
 HEADERS += \
   base.h \
+  brazo1.h \
   cabeza.h \
   colors.h \
   basic_object3d.h \
@@ -21,6 +22,7 @@ HEADERS += \
 SOURCES += \
   base.cc \
   basic_object3d.cc \
+  brazo1.cc \
   cabeza.cc \
   cone.cc \
   cube.cc \

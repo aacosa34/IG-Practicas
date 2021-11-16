@@ -8,7 +8,7 @@
 class _base:public _cabeza
 {
 public:
-    void crear();
+    _base();
     void draw_point();
     void draw_line();
     void draw_fill();
