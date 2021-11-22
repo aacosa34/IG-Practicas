@@ -1,19 +1,19 @@
-#ifndef _BRAZO1_H
-#define _BRAZO1_H
+#ifndef _RUEDA_H
+#define _RUEDA_H
 
 #include "cylinder.h"
 
-class _brazo1
+class _rueda
 {
 public:
-    _brazo1();
+    _rueda();
     void draw_point();
     void draw_line();
     void draw_fill();
     void draw_chess();
 
 protected:
-    _cylinder Cilindro = _cylinder(1.0, 20);
+    _cylinder Rueda = _cylinder(1.0, 20);
 };
 
-#endif // _BRAZO1_H
+#endif // _RUEDA_H

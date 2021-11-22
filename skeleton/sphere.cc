@@ -1,4 +1,4 @@
-#include "sphere.h"
+    #include "sphere.h"
 
 _sphere::_sphere(float Size, int Faces, int Profile)
 {

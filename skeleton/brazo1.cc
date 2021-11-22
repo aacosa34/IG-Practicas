@@ -18,9 +18,9 @@ void _brazo1::draw_line(){
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(-1,3.5,2);
-    glRotatef(45,1,0,0);
-    glScalef(1,3,1);
+    glTranslatef(-1,3.75,0);
+    //glRotatef(,1,0,0);
+    glScalef(1,4,1);
     Cilindro.draw_line();
     glPopMatrix();
 }

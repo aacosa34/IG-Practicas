@@ -6,7 +6,7 @@
 class _sphere:public _objectrev
 {
 public:
-    _sphere(float Size=1.0, int Faces=100, int Profile=100);
+    _sphere(float Size=1.0, int Faces=5, int Profile=5);
 };
 
 #endif // _SPHERE_H
