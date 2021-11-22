@@ -23,7 +23,7 @@
 #include "cone.h"
 #include "sphere.h"
 #include "ply.h"
-#include "base.h"
+#include "modelo.h"
 
 
 namespace _gl_widget_ne {
@@ -81,7 +81,7 @@ private:
   _cone Cone;
   _sphere Sphere;
   _ply Ply;
-  _base Modelo;
+  _modelo Modelo;
 
   _gl_widget_ne::_object Object;
 

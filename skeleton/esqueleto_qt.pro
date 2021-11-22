@@ -1,5 +1,4 @@
 HEADERS += \
-  base.h \
   brazo1.h \
   brazo2.h \
   cabeza.h \
@@ -10,9 +9,11 @@ HEADERS += \
   cylinder.h \
   eje_ruedas.h \
   file_ply_stl.h \
+  modelo.h \
   object3d.h \
   axis.h \
   objectrev.h \
+  pala.h \
   ply.h \
   revply.h \
   rueda.h \
@@ -23,7 +24,6 @@ HEADERS += \
   GL/*.h
 
 SOURCES += \
-  base.cc \
   basic_object3d.cc \
   brazo1.cc \
   brazo2.cc \
@@ -33,9 +33,11 @@ SOURCES += \
   cylinder.cc \
   eje_ruedas.cc \
   file_ply_stl.cc \
+  modelo.cc \
   object3d.cc \
   axis.cc \
   objectrev.cc \
+  pala.cc \
   ply.cc \
   revply.cc \
   rueda.cc \

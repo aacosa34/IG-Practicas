@@ -2,10 +2,8 @@
 #define _CABEZA_H
 
 #include "cube.h"
-#include "brazo1.h"
 
-
-class _cabeza:public _brazo1
+class _cabeza
 {
 public:
     _cabeza();

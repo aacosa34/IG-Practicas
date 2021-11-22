@@ -1,21 +1,18 @@
-#ifndef _BASE_H
-#define _BASE_H
+#ifndef _PALA_H
+#define _PALA_H
 
-#include "object3d.h"
 #include "cube.h"
-#include "cabeza.h"
 
-class _base:public _cabeza
+class _pala
 {
 public:
-    _base();
+    _pala();
     void draw_point();
     void draw_line();
     void draw_fill();
     void draw_chess();
-
 protected:
     _cube Cubo;
 };
 
-#endif // _BASE_H
+#endif // _PALA_H
