@@ -3,10 +3,7 @@
 
 #include "object3d.h"
 #include "cabeza.h"
-#include "brazo1.h"
-#include "brazo2.h"
-#include "pala.h"
-#include "eje_ruedas.h"
+#include "cadena.h"
 #include "cube.h"
 
 class _modelo
@@ -18,13 +15,21 @@ public:
     void draw_fill();
     void draw_chess();
 
+    void girar_cuerpo_derecha();
+    void girar_cuerpo_izquierda();
+    void aumentar_grados_cuerpo();
+    void disminuir_grados_cuerpo();
+
+    void adelantar_brazo();
+    void atrasar_brazo();
+
+    float angulo_cuerpo=0;
+    float velocidad_cuerpo=5;
+
 protected:
     _cube Cubo;
     _cabeza Cabeza;
-    _brazo1 Brazo1;
-    _brazo2 Brazo2;
-    _pala Pala;
-    _eje_ruedas eje;
+    _cadena Cadena;
 };
 
 #endif // _MODELO_H

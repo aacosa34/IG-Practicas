@@ -1,7 +1,9 @@
 HEADERS += \
+  brazo.h \
   brazo1.h \
   brazo2.h \
   cabeza.h \
+  cadena.h \
   colors.h \
   basic_object3d.h \
   cone.h \
@@ -25,9 +27,11 @@ HEADERS += \
 
 SOURCES += \
   basic_object3d.cc \
+  brazo.cc \
   brazo1.cc \
   brazo2.cc \
   cabeza.cc \
+  cadena.cc \
   cone.cc \
   cube.cc \
   cylinder.cc \

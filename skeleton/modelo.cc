@@ -26,38 +26,9 @@ void _modelo::draw_point(){
 void _modelo::draw_line(){
     // Ruedas
     // Las ruedas van a girar sobre si mismas
-    // EJE1
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(0,0,2);
-    eje.draw_line();
-    glPopMatrix();
-
-    // EJE2
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,1);
-    eje.draw_line();
-    glPopMatrix();
-
-    // EJE3
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    eje.draw_line();
-    glPopMatrix();
-
-    // EJE4
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,-1);
-    eje.draw_line();
-    glPopMatrix();
-
-    // EJE5
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,-2);
-    eje.draw_line();
+    Cadena.draw_line();
     glPopMatrix();
 
     // Base de la excavadora
@@ -73,36 +44,13 @@ void _modelo::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,1.5,0);
+    glRotatef(angulo_cuerpo,0,1,0);
     Cabeza.draw_line();
-    glPopMatrix();
-
-    // Brazo 1
-    // a partir de aqui el brazo por completo se mueve hacia adelante y hacia atras
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,1.75,0);
-    Brazo1.draw_line();
-    glPopMatrix();
-
-    // Brazo 2
-    // Esta parte del brazo rota sobre si mismo de la misma manera que el anterior
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,6.5,0);
-    Brazo2.draw_line();
-    glPopMatrix();
-
-    // Pala
-    // La pala se mueve hacia adelante o hacia atras
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,4.75,5.5);
-    Pala.draw_line();
     glPopMatrix();
 
 }
 
-void _modelo::draw_fill(){
+void _modelo::draw_fill(){/*
     // Ruedas
     // Las ruedas van a girar sobre si mismas
     // EJE1
@@ -178,9 +126,10 @@ void _modelo::draw_fill(){
     glTranslatef(-1,4.75,5.5);
     Pala.draw_fill();
     glPopMatrix();
+    */
 }
 
-void _modelo::draw_chess(){
+void _modelo::draw_chess(){/*
     // Ruedas
     // Las ruedas van a girar sobre si mismas
     // EJE1
@@ -256,4 +205,31 @@ void _modelo::draw_chess(){
     glTranslatef(-1,4.75,5.5);
     Pala.draw_chess();
     glPopMatrix();
+    */
+}
+
+void _modelo::girar_cuerpo_derecha(){
+    angulo_cuerpo+=velocidad_cuerpo;
+}
+
+void _modelo::girar_cuerpo_izquierda(){
+    angulo_cuerpo-=velocidad_cuerpo;
+}
+
+void _modelo::aumentar_grados_cuerpo(){
+    if(velocidad_cuerpo<20)
+        velocidad_cuerpo++;
+}
+
+void _modelo::disminuir_grados_cuerpo(){
+    if(velocidad_cuerpo>2)
+        velocidad_cuerpo--;
+}
+
+void _modelo::adelantar_brazo(){
+    Cabeza.inclinar_adelante_brazo();
+}
+
+void _modelo::atrasar_brazo(){
+    Cabeza.inclinar_atras_brazo();
 }

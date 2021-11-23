@@ -51,6 +51,22 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_F:Draw_fill=!Draw_fill;break;
   case Qt::Key_C:Draw_chess=!Draw_chess;break;
 
+  // Grados de libertad
+  case Qt::Key_Q:Modelo.adelantar_brazo();break;
+  case Qt::Key_W:Modelo.atrasar_brazo();break;
+  case Qt::Key_S:Modelo.girar_cuerpo_derecha();break;
+  case Qt::Key_D:Modelo.girar_cuerpo_izquierda();break;
+  case Qt::Key_Z:;break;
+  case Qt::Key_X:;break;
+
+  // Modificacion de los grados de libertad
+  case Qt::Key_E:;break;
+  case Qt::Key_R:;break;
+  case Qt::Key_T:Modelo.aumentar_grados_cuerpo();break;
+  case Qt::Key_Y:Modelo.disminuir_grados_cuerpo();break;
+  case Qt::Key_U:;break;
+  case Qt::Key_I:;break;
+
   case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
   case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
