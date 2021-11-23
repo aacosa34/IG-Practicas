@@ -6,6 +6,7 @@
 #include "brazo1.h"
 #include "brazo2.h"
 #include "pala.h"
+#include "eje_ruedas.h"
 #include "cube.h"
 
 class _modelo
@@ -23,6 +24,7 @@ protected:
     _brazo1 Brazo1;
     _brazo2 Brazo2;
     _pala Pala;
+    _eje_ruedas eje;
 };
 
 #endif // _MODELO_H

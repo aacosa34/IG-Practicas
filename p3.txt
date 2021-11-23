@@ -1,0 +1,104 @@
+// COMO EMPEZAR A TRABAJAR LA P3
+Lo primero es pensar en una figura que sea un modelo jerarquico con al menos 5 niveles y en el que puedas
+tener 3 grados de libertad.
+
+Por lo que tengo entendido, un grado de libertad es una parte del modelo que no es estatica, es decir, a
+la que puedas aplicarle un movimiento tras crear toda la figura. Mas adelante te explicare como hacerlo
+que se me ha ocurrido esta mañana.
+
+Una vez tenemos ya la figura pensada, pasamos a la siguiente parte.
+
+
+// COMO DIBUJAR CADA UNA DE LAS PIEZAS
+
+Al hablar ayer con el profesor me dijo que no hay ningun tipo de exigencia a la hora
+de programarlo. Con esto quiere decir que el modelo puede estar representado en el codigo
+de forma implicita (con herencia) o explicita (to pa' dentro).
+
+Yo he optado por hacerlo de forma explicita. Mi manera de crear el modelo es hacer
+una clase por cada parte que tiene el modelo (cada nodo). Una vez creo la pieza,
+la meto en una clase "main" del modelo, a la que he llamado "modelo". Modelo hereda de
+la clase object3d para poder sobrecargar los metodos de dibujado de puntos, lineas, ... 
+
+    Si tenemos que usar las figuras que tenemos disponibles, como el cono, cilindro, esfera
+    La sobrecarga deberia de hacerse sobre esa no?
+
+    Eso es con un simple include, usas la figura en la clase que la necesitas y listo. Luego
+    lo unico que tienes que hacer para pintarla es hacer cilindro.draw_line(); por ejemplo.
+    Exacto.
+
+    OJO UNA COSA QUE NO FUNCIONA: no se porque los constructores solo se pueden usar con el =
+    no se puede poner _cylinder Cilindro(1.0, 10) por ejemplo.
+
+    Yo los constructores no los he usado xd
+
+    en el constructor de teleneco
+
+
+Bien, pues en cada uno de esos metodos hago lo que he dicho anteriormente. Lo meto todo
+a piñon. Y para calcular la posicion se hace a ojo, no hay que calcular nada (ayer me dijo
+el profesor que calcular donde va cada figura es suicidarse instantaneamente xd). Y de momento 
+no tengo nada mas.
+
+Esta mañana se me ha ocurrido como hacer los grados de libertad en funcion de la manera 
+en la que lo he hecho. Simplemente tengo que poner un rotate en cada figura que se mueva
+y una variable que incremente o decremente los grados de giro en una variable. Todavia tengo
+que probarlo, cuando lo pruebe te cuento con mas detalle.
+
+Y eso es todo.
+
+
+// EJEMPLO DE CODIGO 
+Para dibujar cualquier figura de una manera especifica sigo el siguiente esquema
+
+glMatrixMode(GL_MODELVIEW); // Se elige la matriz de transformacion 
+glPushMatrix(); // Se duplica en el tope de la pila
+// AQUI TODAS LAS TRANSFORMACIONES QUE QUIERAS
+Figura.draw_loquesea();
+glPopMatrix(); // Se quita de la pila
+
+
+
+Clase Teleneco {
+private:
+    _cylinder * pierna_izq
+    _cylinder * pierna_der
+    _cone * Sombrero
+    _sphere * Cabeza
+
+public:
+    Telneco (params){
+        pierna_der = new _cylinder();
+        pierna_izq = new _cylinder();
+        Sombrero = new _cone();
+        Cabeza = new _sphere();
+    }
+
+    void draw_line(){
+        pierna_izq.draw_line(); // Meter en seccion glMatrixMode glPushMatrix glPopMatrix
+        pierna_der.draw_line(); // Meter en seccion glMatrixMode glPushMatrix glPopMatrix
+        Sombrero.draw_line(); // Meter en seccion glMatrixMode glPushMatrix glPopMatrix
+        Cabeza.draw_line(); // Meter en seccion glMatrixMode glPushMatrix glPopMatrix
+    }
+
+    ... Repetir con chess y fill
+    
+    
+    void mov_pierna_izq( grados, angulo etc ){
+        glMatrixMode(GL_MODELVIEW);
+
+        glPushMatrix();
+    
+        glRotatef(a, 0, 1, 0);
+        glRotatef(pierna_izq,0,0,1);
+        glTranslatef(0,-1.0,0);
+
+        glPopMatrix();
+    }
+
+}
+
+toy muy rallao
+xd
+Todas esas cosas metelas en las secciones que te he puesto arriba
+y es lo que estoy haciendo yo

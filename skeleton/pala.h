@@ -2,6 +2,8 @@
 #define _PALA_H
 
 #include "cube.h"
+#include "cylinder.h"
+#include "tetrahedron.h"
 
 class _pala
 {
@@ -13,6 +15,8 @@ public:
     void draw_chess();
 protected:
     _cube Cubo;
+    _cylinder Cilindro = _cylinder(1.0,20);
+    _tetrahedron Tetraedro;
 };
 
 #endif // _PALA_H

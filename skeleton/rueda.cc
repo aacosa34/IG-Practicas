@@ -10,7 +10,8 @@ void _rueda::draw_point(){}
 void _rueda::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glScalef(0.5,0.25,0.5);
+    glRotatef(90,0,0,1);
+    glScalef(0.75,1,0.75);
     Rueda.draw_line();
     glPopMatrix();
 }

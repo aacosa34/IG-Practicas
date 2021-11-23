@@ -52,8 +52,7 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../skeleton/base.cc \
-		../skeleton/basic_object3d.cc \
+SOURCES       = ../skeleton/basic_object3d.cc \
 		../skeleton/brazo1.cc \
 		../skeleton/brazo2.cc \
 		../skeleton/cabeza.cc \
@@ -62,9 +61,11 @@ SOURCES       = ../skeleton/base.cc \
 		../skeleton/cylinder.cc \
 		../skeleton/eje_ruedas.cc \
 		../skeleton/file_ply_stl.cc \
+		../skeleton/modelo.cc \
 		../skeleton/object3d.cc \
 		../skeleton/axis.cc \
 		../skeleton/objectrev.cc \
+		../skeleton/pala.cc \
 		../skeleton/ply.cc \
 		../skeleton/revply.cc \
 		../skeleton/rueda.cc \
@@ -74,8 +75,7 @@ SOURCES       = ../skeleton/base.cc \
 		../skeleton/glwidget.cc \
 		../skeleton/window.cc moc_glwidget.cpp \
 		moc_window.cpp
-OBJECTS       = base.o \
-		basic_object3d.o \
+OBJECTS       = basic_object3d.o \
 		brazo1.o \
 		brazo2.o \
 		cabeza.o \
@@ -84,9 +84,11 @@ OBJECTS       = base.o \
 		cylinder.o \
 		eje_ruedas.o \
 		file_ply_stl.o \
+		modelo.o \
 		object3d.o \
 		axis.o \
 		objectrev.o \
+		pala.o \
 		ply.o \
 		revply.o \
 		rueda.o \
@@ -291,8 +293,7 @@ DIST          = ../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.12.5/gcc_64/mkspecs/features/exceptions.prf \
 		../../../Qt/5.12.5/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.12.5/gcc_64/mkspecs/features/lex.prf \
-		../skeleton/esqueleto_qt.pro ../skeleton/base.h \
-		../skeleton/brazo1.h \
+		../skeleton/esqueleto_qt.pro ../skeleton/brazo1.h \
 		../skeleton/brazo2.h \
 		../skeleton/cabeza.h \
 		../skeleton/colors.h \
@@ -302,9 +303,11 @@ DIST          = ../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../skeleton/cylinder.h \
 		../skeleton/eje_ruedas.h \
 		../skeleton/file_ply_stl.h \
+		../skeleton/modelo.h \
 		../skeleton/object3d.h \
 		../skeleton/axis.h \
 		../skeleton/objectrev.h \
+		../skeleton/pala.h \
 		../skeleton/ply.h \
 		../skeleton/revply.h \
 		../skeleton/rueda.h \
@@ -312,8 +315,7 @@ DIST          = ../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../skeleton/tetrahedron.h \
 		../skeleton/glwidget.h \
 		../skeleton/window.h \
-		GL/*.h ../skeleton/base.cc \
-		../skeleton/basic_object3d.cc \
+		GL/*.h ../skeleton/basic_object3d.cc \
 		../skeleton/brazo1.cc \
 		../skeleton/brazo2.cc \
 		../skeleton/cabeza.cc \
@@ -322,9 +324,11 @@ DIST          = ../../../Qt/5.12.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../skeleton/cylinder.cc \
 		../skeleton/eje_ruedas.cc \
 		../skeleton/file_ply_stl.cc \
+		../skeleton/modelo.cc \
 		../skeleton/object3d.cc \
 		../skeleton/axis.cc \
 		../skeleton/objectrev.cc \
+		../skeleton/pala.cc \
 		../skeleton/ply.cc \
 		../skeleton/revply.cc \
 		../skeleton/rueda.cc \
@@ -750,8 +754,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.12.5/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../skeleton/base.h ../skeleton/brazo1.h ../skeleton/brazo2.h ../skeleton/cabeza.h ../skeleton/colors.h ../skeleton/basic_object3d.h ../skeleton/cone.h ../skeleton/cube.h ../skeleton/cylinder.h ../skeleton/eje_ruedas.h ../skeleton/file_ply_stl.h ../skeleton/object3d.h ../skeleton/axis.h ../skeleton/objectrev.h ../skeleton/ply.h ../skeleton/revply.h ../skeleton/rueda.h ../skeleton/sphere.h ../skeleton/tetrahedron.h ../skeleton/glwidget.h ../skeleton/window.h GL/*.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../skeleton/base.cc ../skeleton/basic_object3d.cc ../skeleton/brazo1.cc ../skeleton/brazo2.cc ../skeleton/cabeza.cc ../skeleton/cone.cc ../skeleton/cube.cc ../skeleton/cylinder.cc ../skeleton/eje_ruedas.cc ../skeleton/file_ply_stl.cc ../skeleton/object3d.cc ../skeleton/axis.cc ../skeleton/objectrev.cc ../skeleton/ply.cc ../skeleton/revply.cc ../skeleton/rueda.cc ../skeleton/sphere.cc ../skeleton/tetrahedron.cc ../skeleton/main.cc ../skeleton/glwidget.cc ../skeleton/window.cc $(DISTDIR)/
+	$(COPY_FILE) --parents ../skeleton/brazo1.h ../skeleton/brazo2.h ../skeleton/cabeza.h ../skeleton/colors.h ../skeleton/basic_object3d.h ../skeleton/cone.h ../skeleton/cube.h ../skeleton/cylinder.h ../skeleton/eje_ruedas.h ../skeleton/file_ply_stl.h ../skeleton/modelo.h ../skeleton/object3d.h ../skeleton/axis.h ../skeleton/objectrev.h ../skeleton/pala.h ../skeleton/ply.h ../skeleton/revply.h ../skeleton/rueda.h ../skeleton/sphere.h ../skeleton/tetrahedron.h ../skeleton/glwidget.h ../skeleton/window.h GL/*.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../skeleton/basic_object3d.cc ../skeleton/brazo1.cc ../skeleton/brazo2.cc ../skeleton/cabeza.cc ../skeleton/cone.cc ../skeleton/cube.cc ../skeleton/cylinder.cc ../skeleton/eje_ruedas.cc ../skeleton/file_ply_stl.cc ../skeleton/modelo.cc ../skeleton/object3d.cc ../skeleton/axis.cc ../skeleton/objectrev.cc ../skeleton/pala.cc ../skeleton/ply.cc ../skeleton/revply.cc ../skeleton/rueda.cc ../skeleton/sphere.cc ../skeleton/tetrahedron.cc ../skeleton/main.cc ../skeleton/glwidget.cc ../skeleton/window.cc $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -915,9 +919,11 @@ moc_glwidget.cpp: ../skeleton/glwidget.h \
 		../skeleton/sphere.h \
 		../skeleton/ply.h \
 		../skeleton/file_ply_stl.h \
-		../skeleton/base.h \
+		../skeleton/modelo.h \
 		../skeleton/cabeza.h \
 		../skeleton/brazo1.h \
+		../skeleton/brazo2.h \
+		../skeleton/pala.h \
 		moc_predefs.h \
 		../../../Qt/5.12.5/gcc_64/bin/moc
 	/home/adrian/Qt/5.12.5/gcc_64/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/moc_predefs.h -I/home/adrian/Qt/5.12.5/gcc_64/mkspecs/linux-g++ -I/home/adrian/Documentos/IG/skeleton -I/home/adrian/Qt/5.12.5/gcc_64/include -I/home/adrian/Qt/5.12.5/gcc_64/include/QtWidgets -I/home/adrian/Qt/5.12.5/gcc_64/include/QtGui -I/home/adrian/Qt/5.12.5/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
@@ -1069,21 +1075,6 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-base.o: ../skeleton/base.cc ../skeleton/base.h \
-		../skeleton/object3d.h \
-		../skeleton/basic_object3d.h \
-		../skeleton/GL/gl.h \
-		../skeleton/GL/gl_mangle.h \
-		../skeleton/GL/glext.h \
-		../skeleton/colors.h \
-		../skeleton/vertex.h \
-		../skeleton/cube.h \
-		../skeleton/cabeza.h \
-		../skeleton/brazo1.h \
-		../skeleton/cylinder.h \
-		../skeleton/objectrev.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o base.o ../skeleton/base.cc
-
 basic_object3d.o: ../skeleton/basic_object3d.cc ../skeleton/basic_object3d.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
@@ -1104,7 +1095,16 @@ brazo1.o: ../skeleton/brazo1.cc ../skeleton/brazo1.h \
 		../skeleton/vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o brazo1.o ../skeleton/brazo1.cc
 
-brazo2.o: ../skeleton/brazo2.cc ../skeleton/brazo2.h
+brazo2.o: ../skeleton/brazo2.cc ../skeleton/brazo2.h \
+		../skeleton/cylinder.h \
+		../skeleton/objectrev.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o brazo2.o ../skeleton/brazo2.cc
 
 cabeza.o: ../skeleton/cabeza.cc ../skeleton/cabeza.h \
@@ -1115,10 +1115,7 @@ cabeza.o: ../skeleton/cabeza.cc ../skeleton/cabeza.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \
 		../skeleton/colors.h \
-		../skeleton/vertex.h \
-		../skeleton/brazo1.h \
-		../skeleton/cylinder.h \
-		../skeleton/objectrev.h
+		../skeleton/vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cabeza.o ../skeleton/cabeza.cc
 
 cone.o: ../skeleton/cone.cc ../skeleton/cone.h \
@@ -1160,6 +1157,23 @@ file_ply_stl.o: ../skeleton/file_ply_stl.cc ../skeleton/file_ply_stl.h \
 		../skeleton/vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o file_ply_stl.o ../skeleton/file_ply_stl.cc
 
+modelo.o: ../skeleton/modelo.cc ../skeleton/modelo.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h \
+		../skeleton/cabeza.h \
+		../skeleton/cube.h \
+		../skeleton/brazo1.h \
+		../skeleton/cylinder.h \
+		../skeleton/objectrev.h \
+		../skeleton/brazo2.h \
+		../skeleton/pala.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modelo.o ../skeleton/modelo.cc
+
 object3d.o: ../skeleton/object3d.cc ../skeleton/object3d.h \
 		../skeleton/basic_object3d.h \
 		../skeleton/GL/gl.h \
@@ -1187,6 +1201,17 @@ objectrev.o: ../skeleton/objectrev.cc ../skeleton/objectrev.h \
 		../skeleton/colors.h \
 		../skeleton/vertex.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objectrev.o ../skeleton/objectrev.cc
+
+pala.o: ../skeleton/pala.cc ../skeleton/pala.h \
+		../skeleton/cube.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pala.o ../skeleton/pala.cc
 
 ply.o: ../skeleton/ply.cc ../skeleton/ply.h \
 		../skeleton/object3d.h \
@@ -1507,9 +1532,11 @@ glwidget.o: ../skeleton/glwidget.cc ../skeleton/glwidget.h \
 		../skeleton/sphere.h \
 		../skeleton/ply.h \
 		../skeleton/file_ply_stl.h \
-		../skeleton/base.h \
+		../skeleton/modelo.h \
 		../skeleton/cabeza.h \
 		../skeleton/brazo1.h \
+		../skeleton/brazo2.h \
+		../skeleton/pala.h \
 		../skeleton/window.h \
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1702,9 +1729,11 @@ window.o: ../skeleton/window.cc ../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApp
 		../skeleton/sphere.h \
 		../skeleton/ply.h \
 		../skeleton/file_ply_stl.h \
-		../skeleton/base.h \
+		../skeleton/modelo.h \
 		../skeleton/cabeza.h \
-		../skeleton/brazo1.h
+		../skeleton/brazo1.h \
+		../skeleton/brazo2.h \
+		../skeleton/pala.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o window.o ../skeleton/window.cc
 
 moc_glwidget.o: moc_glwidget.cpp 
