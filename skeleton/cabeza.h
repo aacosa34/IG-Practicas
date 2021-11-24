@@ -24,9 +24,9 @@ public:
     void disminuir_velocidad_brazo();
 
     float desplazamiento_brazo=0;
-    float velocidad_desplazamiento=0.5;
+    float velocidad_desplazamiento=0.1;
     float angulo_brazo=0;
-    float velocidad_brazo=5;
+    float velocidad_brazo=2;
 
 protected:
     _cube Cubo;

@@ -161,3 +161,11 @@ void _modelo::disminuir_velocidad_brazo(){
     Cabeza.disminuir_velocidad_brazo();
 }
 
+float _modelo::getDesplazamientoBrazo(){
+    return Cabeza.desplazamiento_brazo;
+}
+
+float _modelo::getAnguloBrazo(){
+    return Cabeza.angulo_brazo;
+}
+

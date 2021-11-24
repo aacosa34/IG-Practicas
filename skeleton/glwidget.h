@@ -13,6 +13,7 @@
 #include <GL/gl.h>
 #include <QOpenGLWidget>
 #include <QKeyEvent>
+#include <QTimer>
 #include <iostream>
 #include "vertex.h"
 #include "colors.h"
@@ -63,12 +64,17 @@ public:
   void draw_axis();
   void draw_objects();
 
+  void animacion();
+
 
 protected:
   void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;
   void paintGL() Q_DECL_OVERRIDE;
   void initializeGL() Q_DECL_OVERRIDE;
   void keyPressEvent(QKeyEvent *Keyevent) Q_DECL_OVERRIDE;
+
+protected slots:
+  void tick();
 
 
 private:
@@ -89,6 +95,14 @@ private:
   bool Draw_line;
   bool Draw_fill;
   bool Draw_chess;
+
+  enum estados {QUIETO, GIRAR_CUERPO_DERECHA, GIRAR_CUERPO_IZQUIERDA, AVANZAR_BRAZO,
+               INCLINAR_ADELANTE_BRAZO,RETROCEDER_BRAZO,INCLINAR_ATRAS_BRAZO, INICIO};
+  estados estado=QUIETO;
+  estados ultimo=QUIETO;
+
+  bool Animacion;
+  QTimer * Timer;
 
   float Observer_angle_x;
   float Observer_angle_y;

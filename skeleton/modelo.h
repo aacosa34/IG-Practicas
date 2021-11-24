@@ -30,8 +30,11 @@ public:
     void aumentar_velocidad_brazo();
     void disminuir_velocidad_brazo();
 
+    float getDesplazamientoBrazo();
+    float getAnguloBrazo();
+
     float angulo_cuerpo=0;
-    float velocidad_cuerpo=5;
+    float velocidad_cuerpo=1;
 
 protected:
     _cube Cubo;

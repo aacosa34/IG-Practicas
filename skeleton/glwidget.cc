@@ -51,6 +51,9 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_F:Draw_fill=!Draw_fill;break;
   case Qt::Key_C:Draw_chess=!Draw_chess;break;
 
+  // Activar o desactivar la animacion
+  case Qt::Key_A:Animacion=!Animacion;animacion();break;
+
   // Grados de libertad
   case Qt::Key_Q:Modelo.inclinar_brazo_adelante();break;
   case Qt::Key_W:Modelo.inclinar_brazo_atras();break;
@@ -271,4 +274,67 @@ void _gl_widget::initializeGL()
   Draw_line=true;
   Draw_fill=false;
   Draw_chess=false;
+
+  Animacion=false;
+
+  Timer = new QTimer(this);
+  connect(Timer, SIGNAL(timeout()), this, SLOT(tick()));
+}
+
+void _gl_widget::animacion(){
+    if(Animacion)
+        Timer->start(100);
+    else{
+        Timer->stop();
+        delete Timer;
+        Timer = new QTimer(this);
+    }
+}
+
+void _gl_widget::tick(){
+    switch(estado){
+        case QUIETO:
+            estado = (estado==QUIETO && ultimo==QUIETO) ? GIRAR_CUERPO_DERECHA : QUIETO;
+        break;
+        case GIRAR_CUERPO_DERECHA:
+            if(Modelo.angulo_cuerpo<60)
+                Modelo.girar_cuerpo_derecha();
+            else{estado=AVANZAR_BRAZO; ultimo=GIRAR_CUERPO_DERECHA;}
+        break;
+        case AVANZAR_BRAZO:
+            if(Modelo.getDesplazamientoBrazo()<1)
+                Modelo.adelantar_brazo();
+            else{estado=INCLINAR_ADELANTE_BRAZO; ultimo=AVANZAR_BRAZO;}
+        break;
+        case INCLINAR_ADELANTE_BRAZO:
+            if(Modelo.getAnguloBrazo()<45)
+                Modelo.inclinar_brazo_adelante();
+            else{estado=GIRAR_CUERPO_IZQUIERDA; ultimo=INCLINAR_ADELANTE_BRAZO;}
+        break;
+        case GIRAR_CUERPO_IZQUIERDA:
+            if(Modelo.angulo_cuerpo>-60)
+                Modelo.girar_cuerpo_izquierda();
+            else{estado=RETROCEDER_BRAZO; ultimo=GIRAR_CUERPO_IZQUIERDA;}
+        break;
+        case RETROCEDER_BRAZO:
+            if(Modelo.getDesplazamientoBrazo()>-1)
+                Modelo.atrasar_brazo();
+            else{estado=INCLINAR_ATRAS_BRAZO; ultimo=RETROCEDER_BRAZO;}
+        break;
+        case INCLINAR_ATRAS_BRAZO:
+            if(Modelo.getAnguloBrazo()>-45)
+                Modelo.inclinar_brazo_atras();
+            else estado=INICIO;
+        break;
+        case INICIO:
+            if(Modelo.angulo_cuerpo<0)
+                Modelo.girar_cuerpo_derecha();
+            if(Modelo.getAnguloBrazo()<0)
+                Modelo.inclinar_brazo_adelante();
+            if(Modelo.getDesplazamientoBrazo()<0)
+                Modelo.adelantar_brazo();
+            else{estado=QUIETO; ultimo=QUIETO;}
+        break;
+    }
+    update();
 }
