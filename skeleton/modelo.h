@@ -20,8 +20,15 @@ public:
     void aumentar_grados_cuerpo();
     void disminuir_grados_cuerpo();
 
+    void inclinar_brazo_adelante();
+    void inclinar_brazo_atras();
+    void aumentar_grados_brazo();
+    void disminuir_grados_brazo();
+
     void adelantar_brazo();
     void atrasar_brazo();
+    void aumentar_velocidad_brazo();
+    void disminuir_velocidad_brazo();
 
     float angulo_cuerpo=0;
     float velocidad_cuerpo=5;

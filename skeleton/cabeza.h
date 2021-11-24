@@ -18,10 +18,13 @@ public:
     void aumentar_grados_brazo();
     void disminuir_grados_brazo();
 
-    void bajar_brazo();
-    void subir_brazo();
+    void adelantar_brazo();
+    void atrasar_brazo();
+    void aumentar_velocidad_brazo();
+    void disminuir_velocidad_brazo();
 
-
+    float desplazamiento_brazo=0;
+    float velocidad_desplazamiento=0.5;
     float angulo_brazo=0;
     float velocidad_brazo=5;
 

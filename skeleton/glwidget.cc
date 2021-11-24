@@ -52,20 +52,20 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_C:Draw_chess=!Draw_chess;break;
 
   // Grados de libertad
-  case Qt::Key_Q:Modelo.adelantar_brazo();break;
-  case Qt::Key_W:Modelo.atrasar_brazo();break;
+  case Qt::Key_Q:Modelo.inclinar_brazo_adelante();break;
+  case Qt::Key_W:Modelo.inclinar_brazo_atras();break;
   case Qt::Key_S:Modelo.girar_cuerpo_derecha();break;
   case Qt::Key_D:Modelo.girar_cuerpo_izquierda();break;
-  case Qt::Key_Z:;break;
-  case Qt::Key_X:;break;
+  case Qt::Key_Z:Modelo.adelantar_brazo();break;
+  case Qt::Key_X:Modelo.atrasar_brazo();break;
 
   // Modificacion de los grados de libertad
-  case Qt::Key_E:;break;
-  case Qt::Key_R:;break;
+  case Qt::Key_E:Modelo.aumentar_grados_brazo();break;
+  case Qt::Key_R:Modelo.disminuir_grados_brazo();break;
   case Qt::Key_T:Modelo.aumentar_grados_cuerpo();break;
   case Qt::Key_Y:Modelo.disminuir_grados_cuerpo();break;
-  case Qt::Key_U:;break;
-  case Qt::Key_I:;break;
+  case Qt::Key_U:Modelo.aumentar_velocidad_brazo();break;
+  case Qt::Key_I:Modelo.disminuir_velocidad_brazo();break;
 
   case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;

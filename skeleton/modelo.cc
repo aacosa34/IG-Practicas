@@ -7,20 +7,29 @@ _modelo::_modelo()
 }
 
 void _modelo::draw_point(){
-    /*
+    // Ruedas
+    // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(0,0.75,0);
-    glScalef(4,0.5,4);
+    Cadena.draw_point();
+    glPopMatrix();
+
+    // Base de la excavadora
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1,0);
+    glScalef(4,0.5,5);
     Cubo.draw_point();
     glPopMatrix();
 
+    // Cabeza o cabina de la excavadora
+    // Esta parte va a girar en el eje y sobre la base
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(0,2.5,0);
-    _cabeza::draw_point();
+    glTranslatef(0,1.5,0);
+    glRotatef(angulo_cuerpo,0,1,0);
+    Cabeza.draw_point();
     glPopMatrix();
-    */
 }
 
 void _modelo::draw_line(){
@@ -50,41 +59,12 @@ void _modelo::draw_line(){
 
 }
 
-void _modelo::draw_fill(){/*
+void _modelo::draw_fill(){
     // Ruedas
     // Las ruedas van a girar sobre si mismas
-    // EJE1
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(0,0,2);
-    eje.draw_fill();
-    glPopMatrix();
-
-    // EJE2
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,1);
-    eje.draw_fill();
-    glPopMatrix();
-
-    // EJE3
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    eje.draw_fill();
-    glPopMatrix();
-
-    // EJE4
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,-1);
-    eje.draw_fill();
-    glPopMatrix();
-
-    // EJE5
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,-2);
-    eje.draw_fill();
+    Cadena.draw_fill();
     glPopMatrix();
 
     // Base de la excavadora
@@ -100,70 +80,17 @@ void _modelo::draw_fill(){/*
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,1.5,0);
+    glRotatef(angulo_cuerpo,0,1,0);
     Cabeza.draw_fill();
     glPopMatrix();
-
-    // Brazo 1
-    // a partir de aqui el brazo por completo se mueve hacia adelante y hacia atras
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,1.75,0);
-    Brazo1.draw_fill();
-    glPopMatrix();
-
-    // Brazo 2
-    // Esta parte del brazo rota sobre si mismo de la misma manera que el anterior
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,6.5,0);
-    Brazo2.draw_fill();
-    glPopMatrix();
-
-    // Pala
-    // La pala se mueve hacia adelante o hacia atras
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,4.75,5.5);
-    Pala.draw_fill();
-    glPopMatrix();
-    */
 }
 
-void _modelo::draw_chess(){/*
+void _modelo::draw_chess(){
     // Ruedas
     // Las ruedas van a girar sobre si mismas
-    // EJE1
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    glTranslatef(0,0,2);
-    eje.draw_chess();
-    glPopMatrix();
-
-    // EJE2
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,1);
-    eje.draw_chess();
-    glPopMatrix();
-
-    // EJE3
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    eje.draw_chess();
-    glPopMatrix();
-
-    // EJE4
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,-1);
-    eje.draw_chess();
-    glPopMatrix();
-
-    // EJE5
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(0,0,-2);
-    eje.draw_chess();
+    Cadena.draw_chess();
     glPopMatrix();
 
     // Base de la excavadora
@@ -179,33 +106,9 @@ void _modelo::draw_chess(){/*
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,1.5,0);
+    glRotatef(angulo_cuerpo,0,1,0);
     Cabeza.draw_chess();
     glPopMatrix();
-
-    // Brazo 1
-    // a partir de aqui el brazo por completo se mueve hacia adelante y hacia atras
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,1.75,0);
-    Brazo1.draw_chess();
-    glPopMatrix();
-
-    // Brazo 2
-    // Esta parte del brazo rota sobre si mismo de la misma manera que el anterior
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,6.5,0);
-    Brazo2.draw_chess();
-    glPopMatrix();
-
-    // Pala
-    // La pala se mueve hacia adelante o hacia atras
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glTranslatef(-1,4.75,5.5);
-    Pala.draw_chess();
-    glPopMatrix();
-    */
 }
 
 void _modelo::girar_cuerpo_derecha(){
@@ -226,10 +129,35 @@ void _modelo::disminuir_grados_cuerpo(){
         velocidad_cuerpo--;
 }
 
-void _modelo::adelantar_brazo(){
+void _modelo::inclinar_brazo_adelante(){
     Cabeza.inclinar_adelante_brazo();
 }
 
-void _modelo::atrasar_brazo(){
+void _modelo::inclinar_brazo_atras(){
     Cabeza.inclinar_atras_brazo();
 }
+
+void _modelo::aumentar_grados_brazo(){
+    Cabeza.aumentar_grados_brazo();
+}
+
+void _modelo::disminuir_grados_brazo(){
+    Cabeza.disminuir_grados_brazo();
+}
+
+void _modelo::adelantar_brazo(){
+    Cabeza.adelantar_brazo();
+}
+
+void _modelo::atrasar_brazo(){
+    Cabeza.atrasar_brazo();
+}
+
+void _modelo::aumentar_velocidad_brazo(){
+    Cabeza.aumentar_velocidad_brazo();
+}
+
+void _modelo::disminuir_velocidad_brazo(){
+    Cabeza.disminuir_velocidad_brazo();
+}
+
