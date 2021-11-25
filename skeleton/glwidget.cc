@@ -282,8 +282,9 @@ void _gl_widget::initializeGL()
 }
 
 void _gl_widget::animacion(){
-    if(Animacion)
-        Timer->start(100);
+    if(Animacion){
+        Timer->start(30);
+    }
     else{
         Timer->stop();
         delete Timer;
@@ -329,11 +330,11 @@ void _gl_widget::tick(){
         case INICIO:
             if(Modelo.angulo_cuerpo<0)
                 Modelo.girar_cuerpo_derecha();
-            if(Modelo.getAnguloBrazo()<0)
-                Modelo.inclinar_brazo_adelante();
-            if(Modelo.getDesplazamientoBrazo()<0)
+            else if(Modelo.getDesplazamientoBrazo()<0)
                 Modelo.adelantar_brazo();
-            else{estado=QUIETO; ultimo=QUIETO;}
+            else if(Modelo.getAnguloBrazo()<0)
+                Modelo.inclinar_brazo_adelante();
+            else{estado=QUIETO; ultimo=INICIO;}
         break;
     }
     update();
