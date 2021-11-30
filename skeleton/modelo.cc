@@ -1,9 +1,11 @@
 #include "modelo.h"
 
 
-_modelo::_modelo()
+_modelo::_modelo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
 {
-
+    Cadena = _cadena(cilindro);
+    Cubo = &cubo;
+    Cabeza = _cabeza(cilindro, cubo, tetraedro);
 }
 
 void _modelo::draw_point(){
@@ -19,7 +21,7 @@ void _modelo::draw_point(){
     glPushMatrix();
     glTranslatef(0,1,0);
     glScalef(4,0.5,5);
-    Cubo.draw_point();
+    (*Cubo).draw_point();
     glPopMatrix();
 
     // Cabeza o cabina de la excavadora
@@ -45,7 +47,7 @@ void _modelo::draw_line(){
     glPushMatrix();
     glTranslatef(0,1,0);
     glScalef(4,0.5,5);
-    Cubo.draw_line();
+    (*Cubo).draw_line();
     glPopMatrix();
 
     // Cabeza o cabina de la excavadora
@@ -72,7 +74,7 @@ void _modelo::draw_fill(){
     glPushMatrix();
     glTranslatef(0,1,0);
     glScalef(4,0.5,5);
-    Cubo.draw_fill();
+    (*Cubo).draw_fill();
     glPopMatrix();
 
     // Cabeza o cabina de la excavadora
@@ -98,7 +100,7 @@ void _modelo::draw_chess(){
     glPushMatrix();
     glTranslatef(0,1,0);
     glScalef(4,0.5,5);
-    Cubo.draw_chess();
+    (*Cubo).draw_chess();
     glPopMatrix();
 
     // Cabeza o cabina de la excavadora

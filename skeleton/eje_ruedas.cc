@@ -1,8 +1,9 @@
 #include "eje_ruedas.h"
 
-_eje_ruedas::_eje_ruedas()
+_eje_ruedas::_eje_ruedas(_cylinder &cilindro)
 {
-
+    Rueda = _rueda(cilindro);
+    Eje = &cilindro;
 }
 
 void _eje_ruedas::draw_point(){
@@ -17,7 +18,7 @@ void _eje_ruedas::draw_point(){
     glTranslatef(0,0.375,0);
     glRotatef(90,0,0,1);
     glScalef(0.1,2,0.1);
-    Eje.draw_point();
+    (*Eje).draw_point();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -39,7 +40,7 @@ void _eje_ruedas::draw_line(){
     glTranslatef(0,0.375,0);
     glRotatef(90,0,0,1);
     glScalef(0.1,2,0.1);
-    Eje.draw_line();
+    (*Eje).draw_line();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -61,7 +62,7 @@ void _eje_ruedas::draw_fill(){
     glTranslatef(0,0.375,0);
     glRotatef(90,0,0,1);
     glScalef(0.1,2,0.1);
-    Eje.draw_fill();
+    (*Eje).draw_fill();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -83,7 +84,7 @@ void _eje_ruedas::draw_chess(){
     glTranslatef(0,0.375,0);
     glRotatef(90,0,0,1);
     glScalef(0.1,2,0.1);
-    Eje.draw_chess();
+    (*Eje).draw_chess();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);

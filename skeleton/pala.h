@@ -9,14 +9,15 @@ class _pala
 {
 public:
     _pala();
+    _pala(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
     void draw_point();
     void draw_line();
     void draw_fill();
     void draw_chess();
 protected:
-    _cube Cubo;
-    _cylinder Cilindro = _cylinder(1.0,20);
-    _tetrahedron Tetraedro;
+    _cube *Cubo;
+    _cylinder *Cilindro;
+    _tetrahedron *Tetraedro;
 };
 
 #endif // _PALA_H

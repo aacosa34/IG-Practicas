@@ -88,15 +88,7 @@ private:
   _sphere Sphere;
   _ply Ply;
 
-  _brazo1 Brazo1 = _brazo1();
-  _brazo2 Brazo2 = _brazo2();
-  _pala Pala = _pala();
-  _brazo Brazo = _brazo();
-  _rueda Rueda = _rueda();
-  _eje_ruedas Ejes = _eje_ruedas();
-  _cadena Cadena = _cadena();
-  _cabeza Cabeza = _cabeza();
-  _modelo Modelo = _modelo();
+  _modelo Modelo = _modelo(Cylinder, Cube, Tetrahedron);
 
 
   _gl_widget_ne::_object Object;

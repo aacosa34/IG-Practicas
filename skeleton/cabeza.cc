@@ -1,22 +1,23 @@
 #include "cabeza.h"
 
-_cabeza::_cabeza()
+_cabeza::_cabeza(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
 {
-
+    Cubo = &cubo;
+    Brazo = _brazo(cilindro, cubo, tetraedro);
 }
 
 void _cabeza::draw_point(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glScalef(4,0.5,5);
-    Cubo.draw_point();
+    (*Cubo).draw_point();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1,1.75,0);
     glScalef(2,3,5);
-    Cubo.draw_point();
+    (*Cubo).draw_point();
     glPopMatrix();
 
     // Brazo completo
@@ -36,14 +37,14 @@ void _cabeza::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glScalef(4,0.5,5);
-    Cubo.draw_line();
+    (*Cubo).draw_line();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1,1.75,0);
     glScalef(2,3,5);
-    Cubo.draw_line();
+    (*Cubo).draw_line();
     glPopMatrix();
 
     // Brazo completo
@@ -62,14 +63,14 @@ void _cabeza::draw_fill(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glScalef(4,0.5,5);
-    Cubo.draw_fill();
+    (*Cubo).draw_fill();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1,1.75,0);
     glScalef(2,3,5);
-    Cubo.draw_fill();
+    (*Cubo).draw_fill();
     glPopMatrix();
 
     // Brazo completo
@@ -89,14 +90,14 @@ void _cabeza::draw_chess(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glScalef(4,0.5,5);
-    Cubo.draw_chess();
+    (*Cubo).draw_chess();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1,1.75,0);
     glScalef(2,3,5);
-    Cubo.draw_chess();
+    (*Cubo).draw_chess();
     glPopMatrix();
 
     // Brazo completo

@@ -8,6 +8,7 @@ class _cabeza
 {
 public:
     _cabeza();
+    _cabeza(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
     void draw_point();
     void draw_line();
     void draw_fill();
@@ -29,7 +30,7 @@ public:
     float velocidad_brazo=2;
 
 protected:
-    _cube Cubo;
+    _cube *Cubo;
     _brazo Brazo;
 };
 

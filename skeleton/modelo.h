@@ -11,6 +11,7 @@ class _modelo
 {
 public:
     _modelo();
+    _modelo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
     void draw_point();
     void draw_line();
     void draw_fill();
@@ -38,9 +39,7 @@ public:
     float velocidad_cuerpo=1;
 
 protected:
-    _cube Cubo;
-    _tetrahedron Tetraedro;
-    _cylinder Cilindro;
+    _cube *Cubo;
     _cabeza Cabeza;
     _cadena Cadena;
 };

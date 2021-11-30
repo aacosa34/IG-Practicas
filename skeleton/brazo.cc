@@ -1,8 +1,10 @@
 #include "brazo.h"
 
-_brazo::_brazo()
+_brazo::_brazo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
 {
-
+    brazo1 = _brazo1(cilindro);
+    brazo2 = _brazo2(cilindro);
+    Pala = _pala(cilindro, cubo, tetraedro);
 }
 
 void _brazo::draw_point(){

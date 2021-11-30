@@ -9,6 +9,7 @@ class _brazo
 {
 public:
     _brazo();
+    _brazo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
     void draw_point();
     void draw_line();
     void draw_fill();

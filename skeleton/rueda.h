@@ -7,13 +7,14 @@ class _rueda
 {
 public:
     _rueda();
+    _rueda(_cylinder &cilindro);
     void draw_point();
     void draw_line();
     void draw_fill();
     void draw_chess();
 
 protected:
-    _cylinder Rueda = _cylinder(1.0, 20);
+    _cylinder *Rueda;
 };
 
 #endif // _RUEDA_H

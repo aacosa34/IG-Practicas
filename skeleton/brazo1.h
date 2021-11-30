@@ -7,13 +7,14 @@ class _brazo1
 {
 public:
     _brazo1();
+    _brazo1(_cylinder &cilindro);
     void draw_point();
     void draw_line();
     void draw_fill();
     void draw_chess();
 
 protected:
-    _cylinder Cilindro = _cylinder(1.0, 20);
+    _cylinder *Cilindro;
 };
 
 #endif // _BRAZO1_H

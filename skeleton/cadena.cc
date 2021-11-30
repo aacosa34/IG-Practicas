@@ -1,8 +1,8 @@
 #include "cadena.h"
 
-_cadena::_cadena()
+_cadena::_cadena(_cylinder &cilindro)
 {
-
+    eje = _eje_ruedas(cilindro);
 }
 
 void _cadena::draw_point(){
