@@ -87,7 +87,17 @@ private:
   _cone Cone;
   _sphere Sphere;
   _ply Ply;
-  _modelo Modelo;
+
+  _brazo1 Brazo1 = _brazo1();
+  _brazo2 Brazo2 = _brazo2();
+  _pala Pala = _pala();
+  _brazo Brazo = _brazo();
+  _rueda Rueda = _rueda();
+  _eje_ruedas Ejes = _eje_ruedas();
+  _cadena Cadena = _cadena();
+  _cabeza Cabeza = _cabeza();
+  _modelo Modelo = _modelo();
+
 
   _gl_widget_ne::_object Object;
 
@@ -96,10 +106,11 @@ private:
   bool Draw_fill;
   bool Draw_chess;
 
-  enum estados {QUIETO, GIRAR_CUERPO_DERECHA, GIRAR_CUERPO_IZQUIERDA, AVANZAR_BRAZO,
+  enum class estados {QUIETO, GIRAR_CUERPO_DERECHA, GIRAR_CUERPO_IZQUIERDA, AVANZAR_BRAZO,
                INCLINAR_ADELANTE_BRAZO,RETROCEDER_BRAZO,INCLINAR_ATRAS_BRAZO, INICIO};
-  estados estado=QUIETO;
-  estados ultimo=QUIETO;
+
+  estados estado=estados::QUIETO;
+  estados ultimo=estados::QUIETO;
 
   bool Animacion;
   QTimer * Timer;

@@ -5,6 +5,7 @@
 #include "cabeza.h"
 #include "cadena.h"
 #include "cube.h"
+#include "tetrahedron.h"
 
 class _modelo
 {
@@ -38,6 +39,8 @@ public:
 
 protected:
     _cube Cubo;
+    _tetrahedron Tetraedro;
+    _cylinder Cilindro;
     _cabeza Cabeza;
     _cadena Cadena;
 };

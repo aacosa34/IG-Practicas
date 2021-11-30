@@ -294,47 +294,47 @@ void _gl_widget::animacion(){
 
 void _gl_widget::tick(){
     switch(estado){
-        case QUIETO:
-            estado = (estado==QUIETO && ultimo==QUIETO) ? GIRAR_CUERPO_DERECHA : QUIETO;
+        case estados::QUIETO:
+            estado = (estado==estados::QUIETO && ultimo==estados::QUIETO) ? estados::GIRAR_CUERPO_DERECHA : estados::QUIETO;
         break;
-        case GIRAR_CUERPO_DERECHA:
+        case estados::GIRAR_CUERPO_DERECHA:
             if(Modelo.angulo_cuerpo<60)
                 Modelo.girar_cuerpo_derecha();
-            else{estado=AVANZAR_BRAZO; ultimo=GIRAR_CUERPO_DERECHA;}
+            else{estado=estados::AVANZAR_BRAZO; ultimo=estados::GIRAR_CUERPO_DERECHA;}
         break;
-        case AVANZAR_BRAZO:
+        case estados::AVANZAR_BRAZO:
             if(Modelo.getDesplazamientoBrazo()<1)
                 Modelo.adelantar_brazo();
-            else{estado=INCLINAR_ADELANTE_BRAZO; ultimo=AVANZAR_BRAZO;}
+            else{estado=estados::INCLINAR_ADELANTE_BRAZO; ultimo=estados::AVANZAR_BRAZO;}
         break;
-        case INCLINAR_ADELANTE_BRAZO:
+        case estados::INCLINAR_ADELANTE_BRAZO:
             if(Modelo.getAnguloBrazo()<45)
                 Modelo.inclinar_brazo_adelante();
-            else{estado=GIRAR_CUERPO_IZQUIERDA; ultimo=INCLINAR_ADELANTE_BRAZO;}
+            else{estado=estados::GIRAR_CUERPO_IZQUIERDA; ultimo=estados::INCLINAR_ADELANTE_BRAZO;}
         break;
-        case GIRAR_CUERPO_IZQUIERDA:
+        case estados::GIRAR_CUERPO_IZQUIERDA:
             if(Modelo.angulo_cuerpo>-60)
                 Modelo.girar_cuerpo_izquierda();
-            else{estado=RETROCEDER_BRAZO; ultimo=GIRAR_CUERPO_IZQUIERDA;}
+            else{estado=estados::RETROCEDER_BRAZO; ultimo=estados::GIRAR_CUERPO_IZQUIERDA;}
         break;
-        case RETROCEDER_BRAZO:
+        case estados::RETROCEDER_BRAZO:
             if(Modelo.getDesplazamientoBrazo()>-1)
                 Modelo.atrasar_brazo();
-            else{estado=INCLINAR_ATRAS_BRAZO; ultimo=RETROCEDER_BRAZO;}
+            else{estado=estados::INCLINAR_ATRAS_BRAZO; ultimo=estados::RETROCEDER_BRAZO;}
         break;
-        case INCLINAR_ATRAS_BRAZO:
+        case estados::INCLINAR_ATRAS_BRAZO:
             if(Modelo.getAnguloBrazo()>-45)
                 Modelo.inclinar_brazo_atras();
-            else estado=INICIO;
+            else estado=estados::INICIO;
         break;
-        case INICIO:
+        case estados::INICIO:
             if(Modelo.angulo_cuerpo<0)
                 Modelo.girar_cuerpo_derecha();
             else if(Modelo.getDesplazamientoBrazo()<0)
                 Modelo.adelantar_brazo();
             else if(Modelo.getAnguloBrazo()<0)
                 Modelo.inclinar_brazo_adelante();
-            else{estado=QUIETO; ultimo=INICIO;}
+            else{estado=estados::QUIETO; ultimo=estados::QUIETO;}
         break;
     }
     update();
