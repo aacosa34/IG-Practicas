@@ -3,7 +3,8 @@
 _cabeza::_cabeza(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
 {
     Cubo = &cubo;
-    Brazo = _brazo(cilindro, cubo, tetraedro);
+    _brazo brazo = _brazo(cilindro, cubo, tetraedro);
+    Brazo = &brazo;
 }
 
 void _cabeza::draw_point(){
@@ -29,7 +30,7 @@ void _cabeza::draw_point(){
     glTranslatef(0,0,desplazamiento_brazo);
     glTranslatef(-1,0.25,0);
     glRotatef(angulo_brazo,1,0,0);
-    Brazo.draw_point();
+    Brazo->draw_point();
     glPopMatrix();
 }
 
@@ -56,7 +57,7 @@ void _cabeza::draw_line(){
     glTranslatef(0,0,desplazamiento_brazo);
     glTranslatef(-1,0.25,0);
     glRotatef(angulo_brazo,1,0,0);
-    Brazo.draw_line();
+    Brazo->draw_line();
     glPopMatrix();
 }
 void _cabeza::draw_fill(){
@@ -82,7 +83,7 @@ void _cabeza::draw_fill(){
     glTranslatef(0,0,desplazamiento_brazo);
     glTranslatef(-1,0.25,0);
     glRotatef(angulo_brazo,1,0,0);
-    Brazo.draw_fill();
+    Brazo->draw_fill();
     glPopMatrix();
 }
 
@@ -109,7 +110,7 @@ void _cabeza::draw_chess(){
     glTranslatef(0,0,desplazamiento_brazo);
     glTranslatef(-1,0.25,0);
     glRotatef(angulo_brazo,1,0,0);
-    Brazo.draw_chess();
+    Brazo->draw_chess();
     glPopMatrix();
 }
 

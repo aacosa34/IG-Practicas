@@ -3,9 +3,11 @@
 
 _modelo::_modelo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
 {
-    Cadena = _cadena(cilindro);
+    _cadena cadena = _cadena(cilindro);
+    Cadena = &cadena;
     Cubo = &cubo;
-    Cabeza = _cabeza(cilindro, cubo, tetraedro);
+    _cabeza cabeza = _cabeza(cilindro, cubo, tetraedro);
+    Cabeza = &cabeza;
 }
 
 void _modelo::draw_point(){
@@ -13,7 +15,7 @@ void _modelo::draw_point(){
     // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    Cadena.draw_point();
+    Cadena->draw_point();
     glPopMatrix();
 
     // Base de la excavadora
@@ -30,7 +32,7 @@ void _modelo::draw_point(){
     glPushMatrix();
     glTranslatef(0,1.5,0);
     glRotatef(angulo_cuerpo,0,1,0);
-    Cabeza.draw_point();
+    Cabeza->draw_point();
     glPopMatrix();
 }
 
@@ -39,7 +41,7 @@ void _modelo::draw_line(){
     // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    Cadena.draw_line();
+    Cadena->draw_line();
     glPopMatrix();
 
     // Base de la excavadora
@@ -56,7 +58,7 @@ void _modelo::draw_line(){
     glPushMatrix();
     glTranslatef(0,1.5,0);
     glRotatef(angulo_cuerpo,0,1,0);
-    Cabeza.draw_line();
+    Cabeza->draw_line();
     glPopMatrix();
 
 }
@@ -66,7 +68,7 @@ void _modelo::draw_fill(){
     // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    Cadena.draw_fill();
+    Cadena->draw_fill();
     glPopMatrix();
 
     // Base de la excavadora
@@ -83,7 +85,7 @@ void _modelo::draw_fill(){
     glPushMatrix();
     glTranslatef(0,1.5,0);
     glRotatef(angulo_cuerpo,0,1,0);
-    Cabeza.draw_fill();
+    Cabeza->draw_fill();
     glPopMatrix();
 }
 
@@ -92,7 +94,7 @@ void _modelo::draw_chess(){
     // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    Cadena.draw_chess();
+    Cadena->draw_chess();
     glPopMatrix();
 
     // Base de la excavadora
@@ -109,7 +111,7 @@ void _modelo::draw_chess(){
     glPushMatrix();
     glTranslatef(0,1.5,0);
     glRotatef(angulo_cuerpo,0,1,0);
-    Cabeza.draw_chess();
+    Cabeza->draw_chess();
     glPopMatrix();
 }
 
@@ -132,42 +134,42 @@ void _modelo::disminuir_grados_cuerpo(){
 }
 
 void _modelo::inclinar_brazo_adelante(){
-    Cabeza.inclinar_adelante_brazo();
+    Cabeza->inclinar_adelante_brazo();
 }
 
 void _modelo::inclinar_brazo_atras(){
-    Cabeza.inclinar_atras_brazo();
+    Cabeza->inclinar_atras_brazo();
 }
 
 void _modelo::aumentar_grados_brazo(){
-    Cabeza.aumentar_grados_brazo();
+    Cabeza->aumentar_grados_brazo();
 }
 
 void _modelo::disminuir_grados_brazo(){
-    Cabeza.disminuir_grados_brazo();
+    Cabeza->disminuir_grados_brazo();
 }
 
 void _modelo::adelantar_brazo(){
-    Cabeza.adelantar_brazo();
+    Cabeza->adelantar_brazo();
 }
 
 void _modelo::atrasar_brazo(){
-    Cabeza.atrasar_brazo();
+    Cabeza->atrasar_brazo();
 }
 
 void _modelo::aumentar_velocidad_brazo(){
-    Cabeza.aumentar_velocidad_brazo();
+    Cabeza->aumentar_velocidad_brazo();
 }
 
 void _modelo::disminuir_velocidad_brazo(){
-    Cabeza.disminuir_velocidad_brazo();
+    Cabeza->disminuir_velocidad_brazo();
 }
 
 float _modelo::getDesplazamientoBrazo(){
-    return Cabeza.desplazamiento_brazo;
+    return Cabeza->desplazamiento_brazo;
 }
 
 float _modelo::getAnguloBrazo(){
-    return Cabeza.angulo_brazo;
+    return Cabeza->angulo_brazo;
 }
 

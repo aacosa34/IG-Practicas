@@ -2,7 +2,8 @@
 
 _eje_ruedas::_eje_ruedas(_cylinder &cilindro)
 {
-    Rueda = _rueda(cilindro);
+    _rueda rueda = _rueda(cilindro);
+    Rueda = &rueda;
     Eje = &cilindro;
 }
 
@@ -10,7 +11,7 @@ void _eje_ruedas::draw_point(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1.5,0.375,0);
-    Rueda.draw_point();
+    Rueda->draw_point();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -24,7 +25,7 @@ void _eje_ruedas::draw_point(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(-1.5,0.375,0);
-    Rueda.draw_point();
+    Rueda->draw_point();
     glPopMatrix();
 }
 
@@ -32,7 +33,7 @@ void _eje_ruedas::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1.5,0.375,0);
-    Rueda.draw_line();
+    Rueda->draw_line();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -46,7 +47,7 @@ void _eje_ruedas::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(-1.5,0.375,0);
-    Rueda.draw_line();
+    Rueda->draw_line();
     glPopMatrix();
 }
 
@@ -54,7 +55,7 @@ void _eje_ruedas::draw_fill(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1.5,0.375,0);
-    Rueda.draw_fill();
+    Rueda->draw_fill();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -68,7 +69,7 @@ void _eje_ruedas::draw_fill(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(-1.5,0.375,0);
-    Rueda.draw_fill();
+    Rueda->draw_fill();
     glPopMatrix();
 }
 
@@ -76,7 +77,7 @@ void _eje_ruedas::draw_chess(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1.5,0.375,0);
-    Rueda.draw_chess();
+    Rueda->draw_chess();
     glPopMatrix();
 
     glMatrixMode(GL_MODELVIEW);
@@ -90,6 +91,6 @@ void _eje_ruedas::draw_chess(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(-1.5,0.375,0);
-    Rueda.draw_chess();
+    Rueda->draw_chess();
     glPopMatrix();
 }

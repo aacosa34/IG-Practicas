@@ -14,7 +14,7 @@ public:
     void draw_fill();
     void draw_chess();
 protected:
-    _rueda Rueda;
+    _rueda *Rueda;
     _cylinder *Eje;
 };
 

@@ -2,7 +2,8 @@
 
 _cadena::_cadena(_cylinder &cilindro)
 {
-    eje = _eje_ruedas(cilindro);
+    _eje_ruedas Eje = _eje_ruedas(cilindro);
+    eje = &Eje;
 }
 
 void _cadena::draw_point(){
@@ -10,34 +11,34 @@ void _cadena::draw_point(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,2);
-    eje.draw_point();
+    eje->draw_point();
     glPopMatrix();
 
     // EJE2
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,1);
-    eje.draw_point();
+    eje->draw_point();
     glPopMatrix();
 
     // EJE3
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    eje.draw_point();
+    eje->draw_point();
     glPopMatrix();
 
     // EJE4
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-1);
-    eje.draw_point();
+    eje->draw_point();
     glPopMatrix();
 
     // EJE5
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-2);
-    eje.draw_point();
+    eje->draw_point();
     glPopMatrix();
 }
 
@@ -46,34 +47,34 @@ void _cadena::draw_line(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,2);
-    eje.draw_line();
+    eje->draw_line();
     glPopMatrix();
 
     // EJE2
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,1);
-    eje.draw_line();
+    eje->draw_line();
     glPopMatrix();
 
     // EJE3
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    eje.draw_line();
+    eje->draw_line();
     glPopMatrix();
 
     // EJE4
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-1);
-    eje.draw_line();
+    eje->draw_line();
     glPopMatrix();
 
     // EJE5
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-2);
-    eje.draw_line();
+    eje->draw_line();
     glPopMatrix();
 }
 
@@ -82,34 +83,34 @@ void _cadena::draw_fill(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,2);
-    eje.draw_fill();
+    eje->draw_fill();
     glPopMatrix();
 
     // EJE2
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,1);
-    eje.draw_fill();
+    eje->draw_fill();
     glPopMatrix();
 
     // EJE3
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    eje.draw_fill();
+    eje->draw_fill();
     glPopMatrix();
 
     // EJE4
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-1);
-    eje.draw_fill();
+    eje->draw_fill();
     glPopMatrix();
 
     // EJE5
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-2);
-    eje.draw_fill();
+    eje->draw_fill();
     glPopMatrix();
 }
 
@@ -118,33 +119,33 @@ void _cadena::draw_chess(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,2);
-    eje.draw_chess();
+    eje->draw_chess();
     glPopMatrix();
 
     // EJE2
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,1);
-    eje.draw_chess();
+    eje->draw_chess();
     glPopMatrix();
 
     // EJE3
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    eje.draw_chess();
+    eje->draw_chess();
     glPopMatrix();
 
     // EJE4
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-1);
-    eje.draw_chess();
+    eje->draw_chess();
     glPopMatrix();
 
     // EJE5
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,-2);
-    eje.draw_chess();
+    eje->draw_chess();
     glPopMatrix();
 }

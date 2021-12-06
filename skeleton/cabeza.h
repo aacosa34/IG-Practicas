@@ -31,7 +31,7 @@ public:
 
 protected:
     _cube *Cubo;
-    _brazo Brazo;
+    _brazo *Brazo;
 };
 
 #endif // _CABEZA_H

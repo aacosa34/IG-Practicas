@@ -14,7 +14,7 @@ public:
     void draw_chess();
 
 protected:
-    _eje_ruedas eje;
+    _eje_ruedas *eje;
 };
 
 #endif // _CADENA_H

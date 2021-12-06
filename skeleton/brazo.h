@@ -16,9 +16,9 @@ public:
     void draw_chess();
 
 protected:
-    _brazo1 brazo1;
-    _brazo2 brazo2;
-    _pala Pala;
+    _brazo1 *brazo1;
+    _brazo2 *brazo2;
+    _pala *pala;
 };
 
 #endif // _BRAZO_H

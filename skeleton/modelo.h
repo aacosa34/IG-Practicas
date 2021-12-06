@@ -40,8 +40,8 @@ public:
 
 protected:
     _cube *Cubo;
-    _cabeza Cabeza;
-    _cadena Cadena;
+    _cabeza *Cabeza;
+    _cadena *Cadena;
 };
 
 #endif // _MODELO_H
