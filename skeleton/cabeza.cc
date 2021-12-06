@@ -1,9 +1,8 @@
 #include "cabeza.h"
 
-_cabeza::_cabeza(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
+_cabeza::_cabeza(_cube &cubo, _brazo &brazo)
 {
     Cubo = &cubo;
-    _brazo brazo = _brazo(cilindro, cubo, tetraedro);
     Brazo = &brazo;
 }
 

@@ -1,8 +1,7 @@
 #include "eje_ruedas.h"
 
-_eje_ruedas::_eje_ruedas(_cylinder &cilindro)
+_eje_ruedas::_eje_ruedas(_rueda &rueda, _cylinder &cilindro)
 {
-    _rueda rueda = _rueda(cilindro);
     Rueda = &rueda;
     Eje = &cilindro;
 }

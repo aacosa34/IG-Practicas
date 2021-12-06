@@ -1,18 +1,15 @@
 #include "modelo.h"
 
 
-_modelo::_modelo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro)
+_modelo::_modelo(_cube &cubo, _cadena &cadena, _cabeza &cabeza)
 {
-    _cadena cadena = _cadena(cilindro);
-    Cadena = &cadena;
     Cubo = &cubo;
-    _cabeza cabeza = _cabeza(cilindro, cubo, tetraedro);
+    Cadena = &cadena;
     Cabeza = &cabeza;
 }
 
 void _modelo::draw_point(){
     // Ruedas
-    // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     Cadena->draw_point();
@@ -38,7 +35,6 @@ void _modelo::draw_point(){
 
 void _modelo::draw_line(){
     // Ruedas
-    // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     Cadena->draw_line();
@@ -65,7 +61,6 @@ void _modelo::draw_line(){
 
 void _modelo::draw_fill(){
     // Ruedas
-    // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     Cadena->draw_fill();
@@ -91,7 +86,6 @@ void _modelo::draw_fill(){
 
 void _modelo::draw_chess(){
     // Ruedas
-    // Las ruedas van a girar sobre si mismas
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     Cadena->draw_chess();

@@ -8,7 +8,7 @@ class _eje_ruedas
 {
 public:
     _eje_ruedas();
-    _eje_ruedas(_cylinder &cilindro);
+    _eje_ruedas(_rueda &Rueda, _cylinder &cilindro);
     void draw_point();
     void draw_line();
     void draw_fill();

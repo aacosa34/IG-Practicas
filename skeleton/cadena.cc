@@ -1,8 +1,7 @@
 #include "cadena.h"
 
-_cadena::_cadena(_cylinder &cilindro)
+_cadena::_cadena(_eje_ruedas &Eje)
 {
-    _eje_ruedas Eje = _eje_ruedas(cilindro);
     eje = &Eje;
 }
 

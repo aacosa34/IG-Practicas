@@ -278,15 +278,16 @@ void _gl_widget::initializeGL()
   Animacion=false;
 
   Timer = new QTimer(this);
-  connect(Timer, SIGNAL(timeout()), this, SLOT(tick()));
 }
 
 void _gl_widget::animacion(){
     if(Animacion){
+        connect(Timer, SIGNAL(timeout()), this, SLOT(tick()));
         Timer->start(30);
     }
     else{
         Timer->stop();
+        disconnect(Timer, SIGNAL(timeout()), 0, 0);
         delete Timer;
         Timer = new QTimer(this);
     }

@@ -7,7 +7,7 @@ class _cadena
 {
 public:
     _cadena();
-    _cadena(_cylinder &cilindro);
+    _cadena(_eje_ruedas &Eje);
     void draw_point();
     void draw_line();
     void draw_fill();

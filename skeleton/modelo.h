@@ -11,7 +11,7 @@ class _modelo
 {
 public:
     _modelo();
-    _modelo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
+    _modelo(_cube &cubo, _cadena &cadena, _cabeza &cabeza);
     void draw_point();
     void draw_line();
     void draw_fill();

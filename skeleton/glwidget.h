@@ -88,7 +88,22 @@ private:
   _sphere Sphere;
   _ply Ply;
 
-  _modelo Modelo = _modelo(Cylinder, Cube, Tetrahedron);
+  // Para la parte de las ruedas de la excavadora
+  _rueda Rueda = _rueda(Cylinder);
+  _eje_ruedas Eje = _eje_ruedas(Rueda, Cylinder);
+  _cadena Cadena = _cadena(Eje);
+
+  // Para la parte del brazo
+  _brazo1 Brazo1 = _brazo1(Cylinder);
+  _brazo2 Brazo2 = _brazo2(Cylinder);
+  _pala Pala = _pala(Cylinder, Cube, Tetrahedron);
+  _brazo Brazo = _brazo(Brazo1, Brazo2, Pala);
+
+  // La cabeza de la excavadora
+  _cabeza Cabeza = _cabeza(Cube, Brazo);
+
+  // Modelo entero
+  _modelo Modelo = _modelo(Cube, Cadena, Cabeza);
 
 
   _gl_widget_ne::_object Object;

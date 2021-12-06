@@ -8,7 +8,7 @@ class _cabeza
 {
 public:
     _cabeza();
-    _cabeza(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
+    _cabeza(_cube &cubo, _brazo &brazo);
     void draw_point();
     void draw_line();
     void draw_fill();

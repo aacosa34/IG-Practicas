@@ -9,16 +9,16 @@ class _brazo
 {
 public:
     _brazo();
-    _brazo(_cylinder &cilindro, _cube &cubo, _tetrahedron &tetraedro);
+    _brazo(_brazo1 &brazo1, _brazo2 &brazo2, _pala &pala);
     void draw_point();
     void draw_line();
     void draw_fill();
     void draw_chess();
 
 protected:
-    _brazo1 *brazo1;
-    _brazo2 *brazo2;
-    _pala *pala;
+    _brazo1 *Brazo1;
+    _brazo2 *Brazo2;
+    _pala *Pala;
 };
 
 #endif // _BRAZO_H
