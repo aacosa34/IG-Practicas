@@ -24,11 +24,24 @@ class _object3D:public _basic_object3D
 {
   public:
   vector<_vertex3ui> Triangles;
+  vector<_vertex3f> Triangles_normales;
+  vector<_vertex3f> Vertices_normales;
 
   void draw_line();
   void draw_fill();
-  void draw_chess() ;
+  void draw_chess();
 
+  void draw_flat_shaded_lighting();
+  void draw_smooth_shaded_lighting();
+  void draw_texture();
+  void draw_texture_flat_shading_lighting();
+  void draw_texture_smooth_shading_lighting();
+
+  void calculo_normales_caras();
+  void calculo_normales_vertices();
+
+  private:
+  vector<int> n_normales;
 };
 
 #endif // OBJECT3D_H

@@ -49,7 +49,6 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_P:Draw_point=!Draw_point;break;
   case Qt::Key_L:Draw_line=!Draw_line;break;
   case Qt::Key_F:Draw_fill=!Draw_fill;break;
-  case Qt::Key_C:Draw_chess=!Draw_chess;break;
 
   // Activar o desactivar la animacion
   case Qt::Key_A:Animacion=!Animacion;animacion();break;
@@ -69,6 +68,20 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_Y:Modelo.disminuir_grados_cuerpo();break;
   case Qt::Key_U:Modelo.aumentar_velocidad_brazo();break;
   case Qt::Key_I:Modelo.disminuir_velocidad_brazo();break;
+
+  // Display mode
+  case Qt::Key_F1:Modo_render=SOLID_MODE;break;
+  case Qt::Key_F2:Modo_render=CHESS_MODE;break;
+  case Qt::Key_F3:Modo_render=FLAT_SHADED_LIGHTING;break;
+  case Qt::Key_F4:Modo_render=SMOOTH_SHADED_LIGHTING;break;
+  case Qt::Key_F5:Modo_render=TEXTURE;break;
+  case Qt::Key_F6:Modo_render=TEXTURE_FLAT_SHADING;break;
+  case Qt::Key_F7:Modo_render=SMOOTH_TEXTURE_SHADED_LIGHTING;break;
+
+  case Qt::Key_J:;break;
+  case Qt::Key_K:;break;
+
+  case Qt::Key_M:;break;
 
   case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
@@ -175,29 +188,76 @@ void _gl_widget::draw_objects()
   }
 
   if (Draw_fill){
-    glColor3fv((GLfloat *) &BLUE);
-    switch (Object){
-    case OBJECT_TETRAHEDRON:Tetrahedron.draw_fill();break;
-    case OBJECT_CUBE:Cube.draw_fill();break;
-    case OBJECT_CONE:Cone.draw_fill();break;
-    case OBJECT_CYLINDER:Cylinder.draw_fill();break;
-    case OBJECT_SPHERE:Sphere.draw_fill();break;
-    case OBJECT_PLY:Ply.draw_fill();break;
-    case OBJECT_HIERARCHICAL:Modelo.draw_fill();break;
-    default:break;
-    }
-  }
+    switch(Modo_render){
+        case SOLID_MODE:
+                glColor3fv((GLfloat *) &BLUE);
+                switch (Object){
+                case OBJECT_TETRAHEDRON:Tetrahedron.draw_fill();break;
+                case OBJECT_CUBE:Cube.draw_fill();break;
+                case OBJECT_CONE:Cone.draw_fill();break;
+                case OBJECT_CYLINDER:Cylinder.draw_fill();break;
+                case OBJECT_SPHERE:Sphere.draw_fill();break;
+                case OBJECT_PLY:Ply.draw_fill();break;
+                case OBJECT_HIERARCHICAL:Modelo.draw_fill();break;
+                default:break;
+                }
+        break;
 
-  if (Draw_chess){
-    switch (Object){
-    case OBJECT_TETRAHEDRON:Tetrahedron.draw_chess();break;
-    case OBJECT_CUBE:Cube.draw_chess();break;
-    case OBJECT_CONE:Cone.draw_chess();break;
-    case OBJECT_CYLINDER:Cylinder.draw_chess();break;
-    case OBJECT_SPHERE:Sphere.draw_chess();break;
-    case OBJECT_PLY:Ply.draw_chess();break;
-    case OBJECT_HIERARCHICAL:Modelo.draw_chess();break;
-    default:break;
+        case CHESS_MODE:
+            switch (Object){
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_chess();break;
+            case OBJECT_CUBE:Cube.draw_chess();break;
+            case OBJECT_CONE:Cone.draw_chess();break;
+            case OBJECT_CYLINDER:Cylinder.draw_chess();break;
+            case OBJECT_SPHERE:Sphere.draw_chess();break;
+            case OBJECT_PLY:Ply.draw_chess();break;
+            case OBJECT_HIERARCHICAL:Modelo.draw_chess();break;
+            default:break;
+            }
+        break;
+
+        case FLAT_SHADED_LIGHTING:
+        {
+        _vertex4f Ambient(0.1,0.1,0.1,1);
+
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
+
+        glEnable(GL_LIGHTING);
+        switch (Object){
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_flat_shaded_lighting();break;
+            case OBJECT_CUBE:Cube.draw_flat_shaded_lighting();break;
+            case OBJECT_CONE:Cone.draw_flat_shaded_lighting();break;
+            case OBJECT_CYLINDER:Cylinder.draw_flat_shaded_lighting();break;
+            case OBJECT_SPHERE:Sphere.draw_flat_shaded_lighting();break;
+            case OBJECT_PLY:Ply.draw_flat_shaded_lighting();break;
+            default:break;
+            }
+        glDisable(GL_LIGHTING);
+        }
+        break;
+
+
+        case SMOOTH_SHADED_LIGHTING:
+        switch (Object){
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_smooth_shaded_lighting();break;
+            case OBJECT_CUBE:Cube.draw_smooth_shaded_lighting();break;
+            case OBJECT_CONE:Cone.draw_smooth_shaded_lighting();break;
+            case OBJECT_CYLINDER:Cylinder.draw_smooth_shaded_lighting();break;
+            case OBJECT_SPHERE:Sphere.draw_smooth_shaded_lighting();break;
+            case OBJECT_PLY:Ply.draw_smooth_shaded_lighting();break;
+            default:break;
+        }
+        break;
+
+        case TEXTURE:
+        break;
+
+        case TEXTURE_FLAT_SHADING:
+        break;
+
+        case SMOOTH_TEXTURE_SHADED_LIGHTING:
+        break;
+
     }
   }
 }

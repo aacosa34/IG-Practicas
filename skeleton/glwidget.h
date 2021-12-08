@@ -38,8 +38,9 @@ namespace _gl_widget_ne {
   const float DEFAULT_DISTANCE=2;
   const float ANGLE_STEP=1;
 
-  typedef enum {MODE_DRAW_POINT,MODE_DRAW_LINE,MODE_DRAW_FILL,MODE_DRAW_CHESS} _mode_draw;
+  typedef enum {MODE_DRAW_POINT,MODE_DRAW_LINE,MODE_DRAW_FILL} _mode_draw;
   typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE,OBJECT_CONE,OBJECT_CYLINDER,OBJECT_SPHERE,OBJECT_PLY, OBJECT_HIERARCHICAL} _object;
+  typedef enum {SOLID_MODE,CHESS_MODE,FLAT_SHADED_LIGHTING,SMOOTH_SHADED_LIGHTING,TEXTURE,TEXTURE_FLAT_SHADING,SMOOTH_TEXTURE_SHADED_LIGHTING} _render_mode;
 }
 
 class _window;
@@ -65,6 +66,9 @@ public:
   void draw_objects();
 
   void animacion();
+
+  void luces();
+  void materiales();
 
 
 protected:
@@ -125,6 +129,8 @@ private:
   float Observer_angle_x;
   float Observer_angle_y;
   float Observer_distance;
+
+  _gl_widget_ne::_render_mode Modo_render;
 };
 
 #endif
