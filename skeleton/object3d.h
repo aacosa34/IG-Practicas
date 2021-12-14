@@ -40,7 +40,7 @@ class _object3D:public _basic_object3D
   void calculo_normales_caras();
   void calculo_normales_vertices();
 
-  private:
+  protected:
   vector<int> n_normales;
 };
 

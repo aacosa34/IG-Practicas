@@ -6,10 +6,10 @@ _cylinder::_cylinder(float Size, int Faces)
 
     vector<_vertex3f> perfil;
 
-    perfil.push_back(_vertex3f(0.0, Size/2, 0.0));
-    perfil.push_back(_vertex3f(Size/2, Size/2, 0.0));
-    perfil.push_back(_vertex3f(Size/2, -Size/2, 0.0));
     perfil.push_back(_vertex3f(0.0, -Size/2, 0.0));
+    perfil.push_back(_vertex3f(Size/2, -Size/2, 0.0));
+    perfil.push_back(_vertex3f(Size/2, Size/2, 0.0));
+    perfil.push_back(_vertex3f(0.0, Size/2, 0.0));
 
     crearRevolucion(perfil, Faces);
 }

@@ -67,8 +67,8 @@ public:
 
   void animacion();
 
-  void luces();
-  void materiales();
+  void set_luces();
+  void set_materiales();
 
 
 protected:
@@ -126,11 +126,16 @@ private:
   bool Animacion;
   QTimer * Timer;
 
+  _gl_widget_ne::_render_mode Modo_render;
+  bool luz0_activa;
+  bool luz1_activa;
+
+  float angulo_luz_magenta=0;
+
   float Observer_angle_x;
   float Observer_angle_y;
   float Observer_distance;
 
-  _gl_widget_ne::_render_mode Modo_render;
 };
 
 #endif

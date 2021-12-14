@@ -78,8 +78,8 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_F6:Modo_render=TEXTURE_FLAT_SHADING;break;
   case Qt::Key_F7:Modo_render=SMOOTH_TEXTURE_SHADED_LIGHTING;break;
 
-  case Qt::Key_J:;break;
-  case Qt::Key_K:;break;
+  case Qt::Key_J:luz0_activa=!luz0_activa;break;
+  case Qt::Key_K:luz1_activa=!luz1_activa;break;
 
   case Qt::Key_M:;break;
 
@@ -222,6 +222,8 @@ void _gl_widget::draw_objects()
 
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
 
+        set_luces();
+
         glEnable(GL_LIGHTING);
         switch (Object){
             case OBJECT_TETRAHEDRON:Tetrahedron.draw_flat_shaded_lighting();break;
@@ -238,6 +240,7 @@ void _gl_widget::draw_objects()
 
 
         case SMOOTH_SHADED_LIGHTING:
+        glEnable(GL_LIGHTING);
         switch (Object){
             case OBJECT_TETRAHEDRON:Tetrahedron.draw_smooth_shaded_lighting();break;
             case OBJECT_CUBE:Cube.draw_smooth_shaded_lighting();break;
@@ -246,6 +249,7 @@ void _gl_widget::draw_objects()
             case OBJECT_SPHERE:Sphere.draw_smooth_shaded_lighting();break;
             case OBJECT_PLY:Ply.draw_smooth_shaded_lighting();break;
             default:break;
+        glDisable(GL_LIGHTING);
         }
         break;
 
@@ -338,6 +342,9 @@ void _gl_widget::initializeGL()
   Animacion=false;
 
   Timer = new QTimer(this);
+
+  luz0_activa=true;
+  luz1_activa=false;
 }
 
 void _gl_widget::animacion(){
@@ -354,6 +361,10 @@ void _gl_widget::animacion(){
 }
 
 void _gl_widget::tick(){
+    if(luz1_activa){
+        angulo_luz_magenta = (angulo_luz_magenta < 360) ? angulo_luz_magenta += 5 : angulo_luz_magenta = 0;
+    }
+
     switch(estado){
         case estados::QUIETO:
             estado = (estado==estados::QUIETO && ultimo==estados::QUIETO) ? estados::GIRAR_CUERPO_DERECHA : estados::QUIETO;
@@ -399,4 +410,39 @@ void _gl_widget::tick(){
         break;
     }
     update();
+}
+
+void _gl_widget::set_luces(){
+    if(luz0_activa){
+        _vertex4f posicion(0,0,1,0);
+
+        glEnable(GL_LIGHT0);
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+        glLightfv(GL_LIGHT0, GL_POSITION, (GLfloat *)&posicion);
+        glPopMatrix();
+    }
+    else
+        glDisable(GL_LIGHT0);
+
+    if(luz1_activa){
+        GLfloat luz_ambiente[] = {1.0f,1.0f,1.0f,1.0f};
+        GLfloat luz_magenta[] = {1.0f,0.0f,1.0f,1.0f};
+
+        _vertex4f posicion_luz1(12.0, 10.0, 20.0, 1.0);
+        glLightfv(GL_LIGHT1, GL_AMBIENT, luz_ambiente);
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, luz_magenta);
+        glLightfv(GL_LIGHT1, GL_SPECULAR, luz_magenta);
+        glEnable(GL_LIGHT1);
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glRotatef(angulo_luz_magenta,0,1,0);
+        glLightfv(GL_LIGHT1, GL_POSITION, (GLfloat *)&posicion_luz1);
+        glPopMatrix();
+    }
+
+    else
+        glDisable(GL_LIGHT1);
+
 }

@@ -87,11 +87,11 @@ void _object3D::draw_flat_shaded_lighting(){
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glPushMatrix();
         GLfloat color[] = {0.0, 1.0, 0.0, 1.0};
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
+        //glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
         GLfloat ambient[] = {1.0, 1.0, 1.0, 1.0};
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+        //glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
         GLfloat white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        //glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, white);
+        //glMaterialfv(GL_FRONT, GL_SPECULAR, white);
         //glColor3fv((GLfloat *) &GREEN);
         glPopMatrix();
         glShadeModel(GL_FLAT);
@@ -113,14 +113,14 @@ void _object3D::draw_smooth_shaded_lighting(){
          calculo_normales_caras();
          calculo_normales_vertices();
 
-         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         glPolygonMode(GL_FRONT, GL_FILL);
          glPushMatrix();
          GLfloat color[] = {1.0, 1.0, 0.0, 1.0};
-        // glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color);
+        // glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
          GLfloat ambient[] = {1.0, 1.0, 1.0, 1.0};
-        // glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+        // glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
          GLfloat white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        // glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, white);
+        // glMaterialfv(GL_FRONT, GL_SPECULAR, white);
          //glColor3fv((GLfloat *) &YEllOW);
          glPopMatrix();
          glShadeModel(GL_SMOOTH);
@@ -183,7 +183,7 @@ void _object3D::calculo_normales_vertices(){
     float modulo;
 
     if(!Vertices.empty()){
-        Vertices_normales.resize(Vertices.size()); // Cada vertices tiene una normal
+        Vertices_normales.resize(Vertices.size()); // Cada vertice tiene una normal
         n_normales.resize(Vertices.size());
 
         for(unsigned int i = 0; i < Triangles.size(); i++){
