@@ -190,3 +190,34 @@ void _object3D::draw_texture(){
     glDisable(GL_TEXTURE_GEN_T);
     glDisable(GL_TEXTURE_2D);
 }
+
+void _object3D::draw_texture_flat_shading_lighting(){
+    calculo_normales_caras();
+    calculo_normales_vertices();
+
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    draw_flat_shaded_lighting();
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glDisable(GL_TEXTURE_2D);
+}
+
+void _object3D::draw_texture_smooth_shading_lighting(){
+    calculo_normales_caras();
+    calculo_normales_vertices();
+
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    glShadeModel(GL_SMOOTH);
+    draw_smooth_shaded_lighting();
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glDisable(GL_TEXTURE_2D);
+}
