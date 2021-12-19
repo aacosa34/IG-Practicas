@@ -223,7 +223,7 @@ void _gl_widget::draw_objects()
 
         case FLAT_SHADED_LIGHTING:
         {
-        _vertex4f Ambient(0.5,0.5,0.5,1);
+        _vertex4f Ambient(0.1,0.1,0.1,1);
 
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
 
@@ -282,23 +282,53 @@ void _gl_widget::draw_objects()
             default:break;
         }
         break;
+
+        case TEXTURE_FLAT_SHADING:
+        {
+        _vertex4f Ambient(0.1,0.1,0.1,1);
+
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
+
+        set_luces();
+        set_materiales();
+
+        glEnable(GL_LIGHTING);
         switch (Object){
-            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture();break;
-            case OBJECT_CUBE:Cube.draw_texture();break;
-            case OBJECT_CONE:Cone.draw_texture();break;
-            case OBJECT_CYLINDER:Cylinder.draw_texture();break;
-            case OBJECT_SPHERE:Sphere.draw_texture();break;
-            case OBJECT_PLY:Ply.draw_texture();break;
-            case OBJECT_DASHBOARD:Dashboard.draw_texture();break;
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture_flat_shading_lighting();break;
+            case OBJECT_CUBE:Cube.draw_texture_flat_shading_lighting();break;
+            case OBJECT_CONE:Cone.draw_texture_flat_shading_lighting();break;
+            case OBJECT_CYLINDER:Cylinder.draw_texture_flat_shading_lighting();break;
+            case OBJECT_SPHERE:Sphere.draw_texture_flat_shading_lighting();break;
+            case OBJECT_PLY:Ply.draw_texture_flat_shading_lighting();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_texture_flat_shading_lighting();break;
+            default:break;
+            }
+        glDisable(GL_LIGHTING);
+        break;
+        }
+        case SMOOTH_TEXTURE_SHADED_LIGHTING:
+        {
+        _vertex4f Ambient(0.1,0.1,0.1,1);
+
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
+
+        set_luces();
+        set_materiales();
+
+        glEnable(GL_LIGHTING);
+        switch (Object){
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture_smooth_shading_lighting();break;
+            case OBJECT_CUBE:Cube.draw_texture_smooth_shading_lighting();break;
+            case OBJECT_CONE:Cone.draw_texture_smooth_shading_lighting();break;
+            case OBJECT_CYLINDER:Cylinder.draw_texture_smooth_shading_lighting();break;
+            case OBJECT_SPHERE:Sphere.draw_texture_smooth_shading_lighting();break;
+            case OBJECT_PLY:Ply.draw_texture_smooth_shading_lighting();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_texture_smooth_shading_lighting();break;
             default:break;
         }
-        case TEXTURE_FLAT_SHADING:
-
-
+        glDisable(GL_LIGHTING);
         break;
-
-        case SMOOTH_TEXTURE_SHADED_LIGHTING:
-        break;
+        }
 
     }
   }
@@ -385,7 +415,7 @@ void _gl_widget::initializeGL()
   luz1_activa=false;
 
   // Code for reading an image
-  QString File_name("/home/adrian/Documents/IG-Practicas/skeleton/texturas/dia_8192.jpg");
+  QString File_name("/home/adrianas/Documentos/IG-Practicas/skeleton/texturas/dia_8192.jpg");
   QImage Image;
   QImageReader Reader(File_name);
   Reader.setAutoTransform(true);
