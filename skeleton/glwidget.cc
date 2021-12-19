@@ -45,6 +45,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_5:Object=OBJECT_SPHERE;break;
   case Qt::Key_6:Object=OBJECT_PLY;break;
   case Qt::Key_7:Object=OBJECT_HIERARCHICAL;break;
+  case Qt::Key_8:Object=OBJECT_DASHBOARD;break;
 
   case Qt::Key_P:Draw_point=!Draw_point;break;
   case Qt::Key_L:Draw_line=!Draw_line;break;
@@ -81,7 +82,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_J:luz0_activa=!luz0_activa;break;
   case Qt::Key_K:luz1_activa=!luz1_activa;break;
 
-  case Qt::Key_M:;break;
+  case Qt::Key_M:siguiente_material();break;
 
   case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
@@ -168,6 +169,7 @@ void _gl_widget::draw_objects()
     case OBJECT_SPHERE:Sphere.draw_point();break;
     case OBJECT_PLY:Ply.draw_point();break;
     case OBJECT_HIERARCHICAL:Modelo.draw_point();break;
+    case OBJECT_DASHBOARD:Dashboard.draw_point();break;
     default:break;
     }
   }
@@ -183,6 +185,7 @@ void _gl_widget::draw_objects()
     case OBJECT_SPHERE:Sphere.draw_line();break;
     case OBJECT_PLY:Ply.draw_line();break;
     case OBJECT_HIERARCHICAL:Modelo.draw_line();break;
+    case OBJECT_DASHBOARD:Dashboard.draw_line();break;
     default:break;
     }
   }
@@ -199,6 +202,7 @@ void _gl_widget::draw_objects()
                 case OBJECT_SPHERE:Sphere.draw_fill();break;
                 case OBJECT_PLY:Ply.draw_fill();break;
                 case OBJECT_HIERARCHICAL:Modelo.draw_fill();break;
+                case OBJECT_DASHBOARD:Dashboard.draw_fill();break;
                 default:break;
                 }
         break;
@@ -212,17 +216,19 @@ void _gl_widget::draw_objects()
             case OBJECT_SPHERE:Sphere.draw_chess();break;
             case OBJECT_PLY:Ply.draw_chess();break;
             case OBJECT_HIERARCHICAL:Modelo.draw_chess();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_chess();break;
             default:break;
             }
         break;
 
         case FLAT_SHADED_LIGHTING:
         {
-        _vertex4f Ambient(0.1,0.1,0.1,1);
+        _vertex4f Ambient(0.5,0.5,0.5,1);
 
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
 
         set_luces();
+        set_materiales();
 
         glEnable(GL_LIGHTING);
         switch (Object){
@@ -240,6 +246,14 @@ void _gl_widget::draw_objects()
 
 
         case SMOOTH_SHADED_LIGHTING:
+        {
+        _vertex4f Ambient(0.1,0.1,0.1,1);
+
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
+
+        set_luces();
+        set_materiales();
+
         glEnable(GL_LIGHTING);
         switch (Object){
             case OBJECT_TETRAHEDRON:Tetrahedron.draw_smooth_shaded_lighting();break;
@@ -252,8 +266,19 @@ void _gl_widget::draw_objects()
         glDisable(GL_LIGHTING);
         }
         break;
+        }
 
         case TEXTURE:
+        switch (Object){
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture();break;
+            case OBJECT_CUBE:Cube.draw_texture();break;
+            case OBJECT_CONE:Cone.draw_texture();break;
+            case OBJECT_CYLINDER:Cylinder.draw_texture();break;
+            case OBJECT_SPHERE:Sphere.draw_texture();break;
+            case OBJECT_PLY:Ply.draw_texture();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_texture();break;
+            default:break;
+        }
         break;
 
         case TEXTURE_FLAT_SHADING:
@@ -345,6 +370,29 @@ void _gl_widget::initializeGL()
 
   luz0_activa=true;
   luz1_activa=false;
+
+  // Code for reading an image
+  QString File_name("/home/adrian/Documents/IG-Practicas/skeleton/texturas/dia_8192.jpg");
+  QImage Image;
+  QImageReader Reader(File_name);
+  Reader.setAutoTransform(true);
+  Image = Reader.read();
+  if (Image.isNull()) {
+    QMessageBox::information(this, QGuiApplication::applicationDisplayName(),
+                             tr("Cannot load %1.").arg(QDir::toNativeSeparators(File_name)));
+    exit(-1);
+  }
+  Image=Image.mirrored();
+  Image=Image.convertToFormat(QImage::Format_RGB888);
+
+  // Code to control the application of the texture
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+  // Code to pass the image to OpenGL to form a texture 2D
+  glTexImage2D(GL_TEXTURE_2D,0,3,Image.width(),Image.height(),0,GL_RGB,GL_UNSIGNED_BYTE,Image.bits());
 }
 
 void _gl_widget::animacion(){
@@ -445,4 +493,56 @@ void _gl_widget::set_luces(){
     else
         glDisable(GL_LIGHT1);
 
+}
+
+void _gl_widget::set_materiales(){
+    switch (material_activo){
+        case materiales::EMERALD:
+        {
+            _vertex3f diffuse = {0.07568, 0.61424, 0.07568};
+            _vertex3f ambient = {0.0215, 0.1745, 0.0215};
+            _vertex3f specular = {0.633, 0.727811, 0.633};
+            float shininess = 0.6;
+
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, (GLfloat *) &diffuse);
+            glMaterialfv(GL_FRONT, GL_AMBIENT, (GLfloat *) &ambient);
+            glMaterialfv(GL_FRONT, GL_SPECULAR, (GLfloat *) &specular);
+            glMaterialf(GL_FRONT, GL_SHININESS, shininess*128.0);
+        }
+        break;
+        case materiales::OBSIDIAN:
+        {
+            _vertex3f diffuse = {0.18275, 0.17, 0.22525};
+            _vertex3f ambient = {0.05375, 0.05, 0.06625};
+            _vertex3f specular = {0.332741, 0.328634, 0.346435};
+            float shininess = 0.3;
+
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, (GLfloat *) &diffuse);
+            glMaterialfv(GL_FRONT, GL_AMBIENT, (GLfloat *) &ambient);
+            glMaterialfv(GL_FRONT, GL_SPECULAR, (GLfloat *) &specular);
+            glMaterialf(GL_FRONT, GL_SHININESS, shininess*128.0);
+        }
+        break;
+        case materiales::CHROME:
+        {
+            _vertex3f diffuse = {0.4, 0.4, 0.4};
+            _vertex3f ambient = {0.25, 0.25, 0.25};
+            _vertex3f specular = {0.774597, 0.774597, 0.774597};
+            float shininess = 0.6;
+
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, (GLfloat *) &diffuse);
+            glMaterialfv(GL_FRONT, GL_AMBIENT, (GLfloat *) &ambient);
+            glMaterialfv(GL_FRONT, GL_SPECULAR, (GLfloat *) &specular);
+            glMaterialf(GL_FRONT, GL_SHININESS, shininess*128.0);
+        }
+        break;
+    }
+}
+
+void _gl_widget::siguiente_material(){
+    switch(material_activo){
+    case materiales::EMERALD:material_activo=materiales::OBSIDIAN;
+    case materiales::OBSIDIAN:material_activo=materiales::CHROME;
+    case materiales::CHROME:material_activo=materiales::EMERALD;
+    }
 }

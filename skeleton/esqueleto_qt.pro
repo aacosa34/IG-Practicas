@@ -9,6 +9,7 @@ HEADERS += \
   cone.h \
   cube.h \
   cylinder.h \
+  dashboard.h \
   eje_ruedas.h \
   file_ply_stl.h \
   modelo.h \
@@ -35,6 +36,7 @@ SOURCES += \
   cone.cc \
   cube.cc \
   cylinder.cc \
+  dashboard.cc \
   eje_ruedas.cc \
   file_ply_stl.cc \
   modelo.cc \

@@ -65,7 +65,7 @@ void _sphere::calculo_normales_caras(){
 
         n /= modulo;
 
-        Triangles_normales.push_back(n);
+        normales.push_back(n);
 
     }
 }
@@ -89,7 +89,7 @@ void _sphere::draw_flat_shaded_lighting(){
 
         glBegin(GL_TRIANGLES); // Pintamos con triangulos
         for (unsigned int i=0;i<Triangles.size();i++){
-            glNormal3f(Triangles_normales[i].x, Triangles_normales[i].y, Triangles_normales[i].z);
+            glNormal3f(normales[i].x, normales[i].y, normales[i].z);
 
             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]); // Primera componente del triangulo
             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]); // Segunda componente del triangulo

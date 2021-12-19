@@ -13,6 +13,8 @@
 #include <GL/gl.h>
 #include <QOpenGLWidget>
 #include <QKeyEvent>
+#include <QImage>
+#include <QImageReader>
 #include <QTimer>
 #include <iostream>
 #include "vertex.h"
@@ -25,6 +27,7 @@
 #include "sphere.h"
 #include "ply.h"
 #include "modelo.h"
+#include "dashboard.h"
 
 
 namespace _gl_widget_ne {
@@ -39,7 +42,7 @@ namespace _gl_widget_ne {
   const float ANGLE_STEP=1;
 
   typedef enum {MODE_DRAW_POINT,MODE_DRAW_LINE,MODE_DRAW_FILL} _mode_draw;
-  typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE,OBJECT_CONE,OBJECT_CYLINDER,OBJECT_SPHERE,OBJECT_PLY, OBJECT_HIERARCHICAL} _object;
+  typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE,OBJECT_CONE,OBJECT_CYLINDER,OBJECT_SPHERE,OBJECT_PLY, OBJECT_HIERARCHICAL,OBJECT_DASHBOARD} _object;
   typedef enum {SOLID_MODE,CHESS_MODE,FLAT_SHADED_LIGHTING,SMOOTH_SHADED_LIGHTING,TEXTURE,TEXTURE_FLAT_SHADING,SMOOTH_TEXTURE_SHADED_LIGHTING} _render_mode;
 }
 
@@ -69,6 +72,7 @@ public:
 
   void set_luces();
   void set_materiales();
+  void siguiente_material();
 
 
 protected:
@@ -109,6 +113,9 @@ private:
   // Modelo entero
   _modelo Modelo = _modelo(Cube, Cadena, Cabeza);
 
+  // Dashboard
+  _dashboard Dashboard;
+
 
   _gl_widget_ne::_object Object;
 
@@ -118,7 +125,9 @@ private:
   bool Draw_chess;
 
   enum class estados {QUIETO, GIRAR_CUERPO_DERECHA, GIRAR_CUERPO_IZQUIERDA, AVANZAR_BRAZO,
-               INCLINAR_ADELANTE_BRAZO,RETROCEDER_BRAZO,INCLINAR_ATRAS_BRAZO, INICIO};
+                    INCLINAR_ADELANTE_BRAZO,RETROCEDER_BRAZO,INCLINAR_ATRAS_BRAZO, INICIO};
+
+  enum class materiales {EMERALD, OBSIDIAN, CHROME};
 
   estados estado=estados::QUIETO;
   estados ultimo=estados::QUIETO;
@@ -131,6 +140,8 @@ private:
   bool luz1_activa;
 
   float angulo_luz_magenta=0;
+
+  materiales material_activo = materiales::EMERALD;
 
   float Observer_angle_x;
   float Observer_angle_y;

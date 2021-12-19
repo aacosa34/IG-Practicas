@@ -85,20 +85,12 @@ void _object3D::draw_flat_shaded_lighting(){
         calculo_normales_vertices();
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glPushMatrix();
-        GLfloat color[] = {0.0, 1.0, 0.0, 1.0};
-        //glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-        GLfloat ambient[] = {1.0, 1.0, 1.0, 1.0};
-        //glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
-        GLfloat white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        //glMaterialfv(GL_FRONT, GL_SPECULAR, white);
-        //glColor3fv((GLfloat *) &GREEN);
-        glPopMatrix();
+
         glShadeModel(GL_FLAT);
 
         glBegin(GL_TRIANGLES); // Pintamos con triangulos
         for (unsigned int i=0;i<Triangles.size();i++){
-            glNormal3f(Triangles_normales[i].x, Triangles_normales[i].y, Triangles_normales[i].z);
+            glNormal3f(normales[i].x, normales[i].y, normales[i].z);
 
             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]); // Primera componente del triangulo
             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]); // Segunda componente del triangulo
@@ -114,33 +106,16 @@ void _object3D::draw_smooth_shaded_lighting(){
          calculo_normales_vertices();
 
          glPolygonMode(GL_FRONT, GL_FILL);
-         glPushMatrix();
-         GLfloat color[] = {1.0, 1.0, 0.0, 1.0};
-        // glMaterialfv(GL_FRONT, GL_DIFFUSE, color);
-         GLfloat ambient[] = {1.0, 1.0, 1.0, 1.0};
-        // glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
-         GLfloat white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        // glMaterialfv(GL_FRONT, GL_SPECULAR, white);
-         //glColor3fv((GLfloat *) &YEllOW);
-         glPopMatrix();
          glShadeModel(GL_SMOOTH);
 
          glBegin(GL_TRIANGLES);
          for (unsigned int i = 0; i<Triangles.size(); i++){
-             glNormal3f(Vertices_normales[Triangles[i]._0].x, Vertices_normales[Triangles[i]._0].y, Vertices_normales[Triangles[i]._0].z);
-             glVertex3f(Vertices[Triangles[i]._0].x, Vertices[Triangles[i]._0].y, Vertices[Triangles[i]._0].z);
-             //glNormal3fv((GLfloat *) &Vertices_normals[Triangles[i]._0]);
-            // glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]);
-
-             glNormal3f(Vertices_normales[Triangles[i]._1].x, Vertices_normales[Triangles[i]._1].y, Vertices_normales[Triangles[i]._1].z);
-             glVertex3f(Vertices[Triangles[i]._1].x, Vertices[Triangles[i]._1].y, Vertices[Triangles[i]._1].z);
-             //glNormal3fv((GLfloat *) &Vertices_normals[Triangles[i]._1]);
-             //glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]);
-
-             glNormal3f(Vertices_normales[Triangles[i]._2].x, Vertices_normales[Triangles[i]._2].y, Vertices_normales[Triangles[i]._2].z);
-             glVertex3f(Vertices[Triangles[i]._2].x, Vertices[Triangles[i]._2].y, Vertices[Triangles[i]._2].z);
-           //  glNormal3fv((GLfloat *) &Vertices_normals[Triangles[i]._2]);
-           //  glVertex3fv((GLfloat *) &Vertices[Triangles[i]._2]);
+             glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._0]);
+             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]);
+             glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._1]);
+             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]);
+             glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._2]);
+             glVertex3fv((GLfloat *) &Vertices[Triangles[i]._2]);
 
          }
          glEnd();
@@ -172,9 +147,11 @@ void _object3D::calculo_normales_caras(){
 
         modulo = sqrt(pow(n.x, 2) + pow(n.y, 2) + pow(n.z, 2));
 
-        n /= modulo;
+        n.x /= modulo;
+        n.y /= modulo;
+        n.z /= modulo;
 
-        Triangles_normales.push_back(n);
+        normales.push_back(n);
 
     }
 }
@@ -187,19 +164,29 @@ void _object3D::calculo_normales_vertices(){
         n_normales.resize(Vertices.size());
 
         for(unsigned int i = 0; i < Triangles.size(); i++){
-            Vertices_normales[Triangles[i]._0] += Triangles_normales[i];
-            n_normales[Triangles[i]._0]++;
-            Vertices_normales[Triangles[i]._1] += Triangles_normales[i];
-            n_normales[Triangles[i]._1]++;
-            Vertices_normales[Triangles[i]._2] += Triangles_normales[i];
-            n_normales[Triangles[i]._2]++;
+            Vertices_normales[Triangles[i]._0] += normales[i];
+            Vertices_normales[Triangles[i]._1] += normales[i];
+            Vertices_normales[Triangles[i]._2] += normales[i];
         }
 
         for(unsigned int i = 0; i < Vertices_normales.size(); i++){
             modulo = sqrt(pow(Vertices_normales[i].x,2) + pow(Vertices_normales[i].y,2) + pow(Vertices_normales[i].z,2));
 
-            Vertices_normales[i] /= n_normales[i];
-            Vertices_normales[i] /= modulo;
+            Vertices_normales[i].x /= modulo;
+            Vertices_normales[i].y /= modulo;
+            Vertices_normales[i].z /= modulo;
         }
     }
+}
+
+void _object3D::draw_texture(){
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_GEN_S);
+    glEnable(GL_TEXTURE_GEN_T);
+    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    draw_fill();
+    glDisable(GL_TEXTURE_GEN_S);
+    glDisable(GL_TEXTURE_GEN_T);
+    glDisable(GL_TEXTURE_2D);
 }
