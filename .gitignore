@@ -6,3 +6,6 @@
 
 # Ignore .pdf files
 *.pdf
+
+# Ignore esqueleto_qt
+skeleton/esqueleto_qt.*

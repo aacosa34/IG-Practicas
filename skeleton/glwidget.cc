@@ -238,6 +238,7 @@ void _gl_widget::draw_objects()
             case OBJECT_CYLINDER:Cylinder.draw_flat_shaded_lighting();break;
             case OBJECT_SPHERE:Sphere.draw_flat_shaded_lighting();break;
             case OBJECT_PLY:Ply.draw_flat_shaded_lighting();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_flat_shaded_lighting();break;
             default:break;
             }
         glDisable(GL_LIGHTING);
@@ -262,6 +263,7 @@ void _gl_widget::draw_objects()
             case OBJECT_CYLINDER:Cylinder.draw_smooth_shaded_lighting();break;
             case OBJECT_SPHERE:Sphere.draw_smooth_shaded_lighting();break;
             case OBJECT_PLY:Ply.draw_smooth_shaded_lighting();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_smooth_shaded_lighting();break;
             default:break;
         glDisable(GL_LIGHTING);
         }
@@ -280,8 +282,19 @@ void _gl_widget::draw_objects()
             default:break;
         }
         break;
-
+        switch (Object){
+            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture();break;
+            case OBJECT_CUBE:Cube.draw_texture();break;
+            case OBJECT_CONE:Cone.draw_texture();break;
+            case OBJECT_CYLINDER:Cylinder.draw_texture();break;
+            case OBJECT_SPHERE:Sphere.draw_texture();break;
+            case OBJECT_PLY:Ply.draw_texture();break;
+            case OBJECT_DASHBOARD:Dashboard.draw_texture();break;
+            default:break;
+        }
         case TEXTURE_FLAT_SHADING:
+
+
         break;
 
         case SMOOTH_TEXTURE_SHADED_LIGHTING:
@@ -541,8 +554,8 @@ void _gl_widget::set_materiales(){
 
 void _gl_widget::siguiente_material(){
     switch(material_activo){
-    case materiales::EMERALD:material_activo=materiales::OBSIDIAN;
-    case materiales::OBSIDIAN:material_activo=materiales::CHROME;
-    case materiales::CHROME:material_activo=materiales::EMERALD;
+    case materiales::EMERALD:material_activo=materiales::OBSIDIAN;break;
+    case materiales::OBSIDIAN:material_activo=materiales::CHROME;break;
+    case materiales::CHROME:material_activo=materiales::EMERALD;break;
     }
 }

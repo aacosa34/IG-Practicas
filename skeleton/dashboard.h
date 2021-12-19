@@ -7,7 +7,7 @@
 class _dashboard:public _object3D
 {
 public:
-    _dashboard(float Size=1.0, unsigned int divisiones=16);
+    _dashboard(float Size=1.0, unsigned int divisiones=32);
     void draw();
     void draw_texture();
 
