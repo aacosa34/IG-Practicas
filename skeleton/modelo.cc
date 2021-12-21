@@ -109,6 +109,61 @@ void _modelo::draw_chess(){
     glPopMatrix();
 }
 
+void _modelo::draw_flat_shaded_lighting(){
+    // Ruedas
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    Cadena->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    glEnable(GL_RESCALE_NORMAL);
+    // Base de la excavadora
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1,0);
+    glScalef(4,0.5,5);
+    (*Cubo).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    // Cabeza o cabina de la excavadora
+    // Esta parte va a girar en el eje y sobre la base
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1.5,0);
+    glRotatef(angulo_cuerpo,0,1,0);
+    Cabeza->draw_flat_shaded_lighting();
+    glPopMatrix();
+}
+
+void _modelo::draw_smooth_shaded_lighting(){
+    // Ruedas
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    Cadena->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    glEnable(GL_RESCALE_NORMAL);
+    // Base de la excavadora
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1,0);
+    glScalef(4,0.5,5);
+    (*Cubo).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    // Cabeza o cabina de la excavadora
+    // Esta parte va a girar en el eje y sobre la base
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1.5,0);
+    glRotatef(angulo_cuerpo,0,1,0);
+    Cabeza->draw_smooth_shaded_lighting();
+    glPopMatrix();
+}
+
+
 void _modelo::girar_cuerpo_derecha(){
     angulo_cuerpo+=velocidad_cuerpo;
 }

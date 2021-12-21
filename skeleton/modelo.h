@@ -17,6 +17,9 @@ public:
     void draw_fill();
     void draw_chess();
 
+    void draw_flat_shaded_lighting();
+    void draw_smooth_shaded_lighting();
+
     void girar_cuerpo_derecha();
     void girar_cuerpo_izquierda();
     void aumentar_grados_cuerpo();

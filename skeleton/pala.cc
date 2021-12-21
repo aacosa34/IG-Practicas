@@ -162,3 +162,101 @@ void _pala::draw_chess(){
     (*Cilindro).draw_chess();
     glPopMatrix();
 }
+
+void _pala::draw_flat_shaded_lighting(){
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,-1,0);
+    glScalef(3,0.05,2);
+    (*Cubo).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(-1.5,0,0);
+    glScalef(0.05,2,2);
+    (*Tetraedro).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(1.5,0,0);
+    glScalef(0.05,2,2);
+    (*Tetraedro).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,0.5);
+    glRotatef(63,1,0,0);
+    glScalef(3,0.05,2.25);
+    (*Cubo).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1.75,0);
+    glRotatef(90,0,0,1);
+    glScalef(1.5,1,1.5);
+    (*Cilindro).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+}
+
+void _pala::draw_smooth_shaded_lighting(){
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,-1,0);
+    glScalef(3,0.05,2);
+    (*Cubo).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(-1.5,0,0);
+    glScalef(0.05,2,2);
+    (*Tetraedro).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(1.5,0,0);
+    glScalef(0.05,2,2);
+    (*Tetraedro).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,0.5);
+    glRotatef(63,1,0,0);
+    glScalef(3,0.05,2.25);
+    (*Cubo).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,1.75,0);
+    glRotatef(90,0,0,1);
+    glScalef(1.5,1,1.5);
+    (*Cilindro).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+}

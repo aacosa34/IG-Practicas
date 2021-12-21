@@ -14,6 +14,9 @@ public:
     void draw_fill();
     void draw_chess();
 
+    void draw_flat_shaded_lighting();
+    void draw_smooth_shaded_lighting();
+
     void inclinar_adelante_brazo();
     void inclinar_atras_brazo();
     void aumentar_grados_brazo();

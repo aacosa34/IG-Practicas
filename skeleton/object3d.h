@@ -35,9 +35,6 @@ class _object3D:public _basic_object3D
 
   void draw_flat_shaded_lighting();
   void draw_smooth_shaded_lighting();
-  void draw_texture();
-  void draw_texture_flat_shading_lighting();
-  void draw_texture_smooth_shading_lighting();
 
   void calculo_normales_caras();
   void calculo_normales_vertices();

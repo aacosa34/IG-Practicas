@@ -193,7 +193,6 @@ void _gl_widget::draw_objects()
   if (Draw_fill){
     switch(Modo_render){
         case SOLID_MODE:
-                glColor3fv((GLfloat *) &BLUE);
                 switch (Object){
                 case OBJECT_TETRAHEDRON:Tetrahedron.draw_fill();break;
                 case OBJECT_CUBE:Cube.draw_fill();break;
@@ -238,6 +237,7 @@ void _gl_widget::draw_objects()
             case OBJECT_CYLINDER:Cylinder.draw_flat_shaded_lighting();break;
             case OBJECT_SPHERE:Sphere.draw_flat_shaded_lighting();break;
             case OBJECT_PLY:Ply.draw_flat_shaded_lighting();break;
+            case OBJECT_HIERARCHICAL:Modelo.draw_flat_shaded_lighting();break;
             case OBJECT_DASHBOARD:Dashboard.draw_flat_shaded_lighting();break;
             default:break;
             }
@@ -263,6 +263,7 @@ void _gl_widget::draw_objects()
             case OBJECT_CYLINDER:Cylinder.draw_smooth_shaded_lighting();break;
             case OBJECT_SPHERE:Sphere.draw_smooth_shaded_lighting();break;
             case OBJECT_PLY:Ply.draw_smooth_shaded_lighting();break;
+            case OBJECT_HIERARCHICAL:Modelo.draw_smooth_shaded_lighting();break;
             case OBJECT_DASHBOARD:Dashboard.draw_smooth_shaded_lighting();break;
             default:break;
         glDisable(GL_LIGHTING);
@@ -271,65 +272,43 @@ void _gl_widget::draw_objects()
         }
 
         case TEXTURE:
-        switch (Object){
-            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture();break;
-            case OBJECT_CUBE:Cube.draw_texture();break;
-            case OBJECT_CONE:Cone.draw_texture();break;
-            case OBJECT_CYLINDER:Cylinder.draw_texture();break;
-            case OBJECT_SPHERE:Sphere.draw_texture();break;
-            case OBJECT_PLY:Ply.draw_texture();break;
-            case OBJECT_DASHBOARD:Dashboard.draw_texture();break;
-            default:break;
-        }
+            Dashboard.draw_texture();break;
         break;
 
         case TEXTURE_FLAT_SHADING:
         {
-        _vertex4f Ambient(0.1,0.1,0.1,1);
+            _vertex4f Ambient(0.1,0.1,0.1,1);
 
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
+            glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
 
-        set_luces();
-        set_materiales();
+            set_luces();
+            set_materiales();
 
-        glEnable(GL_LIGHTING);
-        switch (Object){
-            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture_flat_shading_lighting();break;
-            case OBJECT_CUBE:Cube.draw_texture_flat_shading_lighting();break;
-            case OBJECT_CONE:Cone.draw_texture_flat_shading_lighting();break;
-            case OBJECT_CYLINDER:Cylinder.draw_texture_flat_shading_lighting();break;
-            case OBJECT_SPHERE:Sphere.draw_texture_flat_shading_lighting();break;
-            case OBJECT_PLY:Ply.draw_texture_flat_shading_lighting();break;
-            case OBJECT_DASHBOARD:Dashboard.draw_texture_flat_shading_lighting();break;
-            default:break;
-            }
-        glDisable(GL_LIGHTING);
-        break;
+            glEnable(GL_LIGHTING);
+
+            Dashboard.draw_texture_flat_shading_lighting();
+
+            glDisable(GL_LIGHTING);
+
         }
+        break;
+
         case SMOOTH_TEXTURE_SHADED_LIGHTING:
         {
-        _vertex4f Ambient(0.1,0.1,0.1,1);
+            _vertex4f Ambient(0.1,0.1,0.1,1);
 
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
+            glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (GLfloat *)&Ambient);
 
-        set_luces();
-        set_materiales();
+            set_luces();
+            set_materiales();
 
-        glEnable(GL_LIGHTING);
-        switch (Object){
-            case OBJECT_TETRAHEDRON:Tetrahedron.draw_texture_smooth_shading_lighting();break;
-            case OBJECT_CUBE:Cube.draw_texture_smooth_shading_lighting();break;
-            case OBJECT_CONE:Cone.draw_texture_smooth_shading_lighting();break;
-            case OBJECT_CYLINDER:Cylinder.draw_texture_smooth_shading_lighting();break;
-            case OBJECT_SPHERE:Sphere.draw_texture_smooth_shading_lighting();break;
-            case OBJECT_PLY:Ply.draw_texture_smooth_shading_lighting();break;
-            case OBJECT_DASHBOARD:Dashboard.draw_texture_smooth_shading_lighting();break;
-            default:break;
+            glEnable(GL_LIGHTING);
+
+            Dashboard.draw_texture_smooth_shading_lighting();
+
+            glDisable(GL_LIGHTING);
         }
-        glDisable(GL_LIGHTING);
         break;
-        }
-
     }
   }
 }

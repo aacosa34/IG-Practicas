@@ -13,6 +13,10 @@ public:
     void draw_fill();
     void draw_chess();
 
+    void draw_flat_shaded_lighting();
+    void draw_smooth_shaded_lighting();
+
+
 protected:
     _cylinder *Rueda;
 };

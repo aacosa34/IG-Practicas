@@ -84,4 +84,42 @@ void _brazo::draw_chess(){
     glPopMatrix();
 }
 
+void _brazo::draw_flat_shaded_lighting(){
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    Brazo1->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,4.75,0);
+    Brazo2->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,3,5.5);
+    Pala->draw_flat_shaded_lighting();
+    glPopMatrix();
+}
+
+void _brazo::draw_smooth_shaded_lighting(){
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    Brazo1->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,4.75,0);
+    Brazo2->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,3,5.5);
+    Pala->draw_smooth_shaded_lighting();
+    glPopMatrix();
+}
+
 

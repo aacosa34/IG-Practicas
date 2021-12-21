@@ -148,3 +148,75 @@ void _cadena::draw_chess(){
     eje->draw_chess();
     glPopMatrix();
 }
+
+void _cadena::draw_flat_shaded_lighting(){
+    // EJE1
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,2);
+    eje->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    // EJE2
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,1);
+    eje->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    // EJE3
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    eje->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    // EJE4
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,-1);
+    eje->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    // EJE5
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,-2);
+    eje->draw_flat_shaded_lighting();
+    glPopMatrix();
+}
+
+void _cadena::draw_smooth_shaded_lighting(){
+    // EJE1
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,2);
+    eje->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    // EJE2
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,1);
+    eje->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    // EJE3
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    eje->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    // EJE4
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,-1);
+    eje->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    // EJE5
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0,-2);
+    eje->draw_smooth_shaded_lighting();
+    glPopMatrix();
+}

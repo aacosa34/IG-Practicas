@@ -40,3 +40,25 @@ void _rueda::draw_chess(){
     (*Rueda).draw_chess();
     glPopMatrix();
 }
+
+void _rueda::draw_flat_shaded_lighting(){
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glRotatef(90,0,0,1);
+    glScalef(0.75,1,0.75);
+    (*Rueda).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+}
+
+void _rueda::draw_smooth_shaded_lighting(){
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glRotatef(90,0,0,1);
+    glScalef(0.75,1,0.75);
+    (*Rueda).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+}

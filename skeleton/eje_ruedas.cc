@@ -93,3 +93,51 @@ void _eje_ruedas::draw_chess(){
     Rueda->draw_chess();
     glPopMatrix();
 }
+
+void _eje_ruedas::draw_flat_shaded_lighting(){
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(1.5,0.375,0);
+    Rueda->draw_flat_shaded_lighting();
+    glPopMatrix();
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0.375,0);
+    glRotatef(90,0,0,1);
+    glScalef(0.1,2,0.1);
+    (*Eje).draw_flat_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(-1.5,0.375,0);
+    Rueda->draw_flat_shaded_lighting();
+    glPopMatrix();
+}
+
+void _eje_ruedas::draw_smooth_shaded_lighting(){
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(1.5,0.375,0);
+    Rueda->draw_smooth_shaded_lighting();
+    glPopMatrix();
+
+    glEnable(GL_RESCALE_NORMAL);
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(0,0.375,0);
+    glRotatef(90,0,0,1);
+    glScalef(0.1,2,0.1);
+    (*Eje).draw_smooth_shaded_lighting();
+    glPopMatrix();
+    glDisable(GL_RESCALE_NORMAL);
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glTranslatef(-1.5,0.375,0);
+    Rueda->draw_smooth_shaded_lighting();
+    glPopMatrix();
+}
