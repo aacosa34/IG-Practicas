@@ -30,10 +30,11 @@ _dashboard::_dashboard(float Size, unsigned int divisiones)
 void _dashboard::draw_texture(){
 
     glEnable(GL_TEXTURE_2D);
+    //glBindTexture();
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 
-    glColor4f(1.0f, 1.0f, 1.0f, 0.0f);
+    glColor4f(1.0f, 1.0f, 1.0f, 0.0f); // PARA LIMPIAR EL COLOR AZUL QUE ME SALIA
     glBegin(GL_TRIANGLES);
     for(unsigned int i=0; i<Triangles.size(); i++){
         glTexCoord2f(Coordenadas_textura[Triangles[i]._0]._0,Coordenadas_textura[Triangles[i]._0]._1);

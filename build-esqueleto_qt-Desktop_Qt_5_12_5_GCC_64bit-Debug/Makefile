@@ -40,7 +40,7 @@ DISTNAME      = esqueleto_qt1.0.0
 DISTDIR = /home/adrianas/Documentos/IG-Practicas/build-esqueleto_qt-Desktop_Qt_5_12_5_GCC_64bit-Debug/.tmp/esqueleto_qt1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/adrianas/Qt/5.12.5/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 /home/adrianas/Qt/5.12.5/gcc_64/lib/libQt5Widgets.so /home/adrianas/Qt/5.12.5/gcc_64/lib/libQt5Gui.so /home/adrianas/Qt/5.12.5/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lGLEW /home/adrianas/Qt/5.12.5/gcc_64/lib/libQt5Widgets.so /home/adrianas/Qt/5.12.5/gcc_64/lib/libQt5Gui.so /home/adrianas/Qt/5.12.5/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -803,6 +803,9 @@ compiler_moc_header_make_all: moc_glwidget.cpp moc_window.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_glwidget.cpp moc_window.cpp
 moc_glwidget.cpp: ../skeleton/glwidget.h \
+		../skeleton/GL/glew.h \
+		../skeleton/GL/glu.h \
+		../skeleton/GL/glu_mangle.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \
@@ -1502,6 +1505,9 @@ main.o: ../skeleton/main.cc ../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApplica
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../skeleton/main.cc
 
 glwidget.o: ../skeleton/glwidget.cc ../skeleton/glwidget.h \
+		../skeleton/GL/glew.h \
+		../skeleton/GL/glu.h \
+		../skeleton/GL/glu_mangle.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \
@@ -1818,6 +1824,9 @@ window.o: ../skeleton/window.cc ../../../Qt/5.12.5/gcc_64/include/QtWidgets/QApp
 		../../../Qt/5.12.5/gcc_64/include/QtWidgets/qmessagebox.h \
 		../../../Qt/5.12.5/gcc_64/include/QtGui/QGuiApplication \
 		../skeleton/glwidget.h \
+		../skeleton/GL/glew.h \
+		../skeleton/GL/glu.h \
+		../skeleton/GL/glu_mangle.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \

@@ -84,17 +84,69 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
 
   case Qt::Key_M:siguiente_material();break;
 
+  case Qt::Key_C:Proyeccion=PERSPECTIVE_PROJECTION;break;
+  case Qt::Key_V:Proyeccion=PARALLEL_PROJECTION;break;
+
   case Qt::Key_Left:Observer_angle_y-=ANGLE_STEP;break;
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
   case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
   case Qt::Key_Down:Observer_angle_x+=ANGLE_STEP;break;
-  case Qt::Key_PageUp:Observer_distance*=1.2;break;
-  case Qt::Key_PageDown:Observer_distance/=1.2;break;
+  case Qt::Key_PageUp:Observer_distance*=ZOOM_VALUE;break;
+  case Qt::Key_PageDown:Observer_distance/=ZOOM_VALUE;break;
   }
 
   update();
 }
 
+void _gl_widget::mousePressEvent(QMouseEvent *event){
+    if(event->buttons() & Qt::RightButton) {
+        Selection_position_x = event->x();
+        Selection_position_y = height() - event->y();
+    }
+}
+
+void _gl_widget::mouseReleaseEvent(QMouseEvent *event){
+    if(event->button() & Qt::RightButton){
+        pick();
+        update();
+    }
+}
+
+void _gl_widget::mouseMoveEvent(QMouseEvent *event){
+    int pos_x = event->x();
+    int pos_y = event->y();
+
+    if(event->buttons() & Qt::LeftButton){
+        if(ultima_pos_x < pos_x)
+            Observer_angle_y+=ANGLE_STEP;
+        else if(ultima_pos_x > pos_x)
+            Observer_angle_y-=ANGLE_STEP;
+
+        if(ultima_pos_y < pos_y)
+            Observer_angle_x+=ANGLE_STEP;
+        else if(ultima_pos_y > pos_y)
+            Observer_angle_x-=ANGLE_STEP;
+
+        ultima_pos_x = pos_x;
+        ultima_pos_y = pos_y;
+
+    }
+    update();
+}
+
+
+void _gl_widget::wheelEvent(QWheelEvent *event){
+   int grados = event->delta();
+   int pasos = grados/15;
+
+   if(grados > 0)
+       Observer_distance /= pasos*ZOOM_VALUE;
+   else if (grados < 0)
+       Observer_distance *= abs(pasos*ZOOM_VALUE);
+
+   event->accept();
+   update();
+}
 
 /*****************************************************************************//**
  * Limpiar ventana
@@ -122,9 +174,15 @@ void _gl_widget::change_projection()
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  // formato(x_minimo,x_maximo, y_minimo, y_maximo,Front_plane, plano_traser)
-  // Front_plane>0  Back_plane>PlanoDelantero)
-  glFrustum(X_MIN,X_MAX,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+  float relacion_aspecto = (float)Window_height/(float)Window_width;
+
+  if(Proyeccion==PERSPECTIVE_PROJECTION)
+      // formato(x_minimo,x_maximo, y_minimo, y_maximo,Front_plane, plano_traser)
+      // Front_plane>0  Back_plane>PlanoDelantero)
+      glFrustum(X_MIN,X_MAX,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
+  else if (Proyeccion==PARALLEL_PROJECTION){
+      glOrtho(X_MIN*factor_escalado,X_MAX*factor_escalado,Y_MIN*relacion_aspecto*factor_escalado,Y_MAX*relacion_aspecto*factor_escalado,FRONT_PLANE_PARALLEL,BACK_PLANE_PARALLEL);
+  }
 }
 
 
@@ -353,6 +411,19 @@ void _gl_widget::resizeGL(int Width1, int Height1)
 
 void _gl_widget::initializeGL()
 {
+  // INICIALIZACION DE GLEW
+  glewExperimental = GL_TRUE;
+  GLenum err = glewInit();
+  if(GLEW_OK != err){
+      /* Problem: glewInit failed, something is seriously wrong. */
+      fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+      // Problem: glewInit failed, something is seriously wrong.
+      QMessageBox MsgBox(this);
+      MsgBox.setText("Error: There is not OpenGL drivers\n\nPlease, look for the information of your GPU(AMD, INTEL or NVIDIA) and install the drivers");
+      MsgBox.exec();
+      Window->close();
+  }
+
   const GLubyte* strm;
 
   strm = glGetString(GL_VENDOR);
@@ -407,6 +478,9 @@ void _gl_widget::initializeGL()
   Image=Image.mirrored();
   Image=Image.convertToFormat(QImage::Format_RGB888);
 
+  glGenTextures(1, &textura);
+  glBindTexture(GL_TEXTURE_2D, textura);
+
   // Code to control the application of the texture
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -415,6 +489,8 @@ void _gl_widget::initializeGL()
 
   // Code to pass the image to OpenGL to form a texture 2D
   glTexImage2D(GL_TEXTURE_2D,0,3,Image.width(),Image.height(),0,GL_RGB,GL_UNSIGNED_BYTE,Image.bits());
+
+  factor_escalado = 5;
 }
 
 void _gl_widget::animacion(){
@@ -567,4 +643,75 @@ void _gl_widget::siguiente_material(){
     case materiales::OBSIDIAN:material_activo=materiales::CHROME;break;
     case materiales::CHROME:material_activo=materiales::EMERALD;break;
     }
+}
+
+// Skeleton for pick fuction using glDeleteFramebuffers
+//
+// Domingo Martín Perandrés
+// GPL
+//
+// Window_width and Window_height are the widht and height of the device window
+// Selection_position_x and Selection_position_y are the coordinates of the mouse
+
+void _gl_widget::pick()
+{
+  makeCurrent();
+
+  // Frame Buffer Object to do the off-screen rendering
+  GLuint FBO;
+  glGenFramebuffers(1,&FBO);
+  glBindFramebuffer(GL_FRAMEBUFFER,FBO);
+
+  // Texture for drawing
+  GLuint Color_texture;
+  glGenTextures(1,&Color_texture);
+  glBindTexture(GL_TEXTURE_2D,Color_texture);
+  // RGBA8
+  glTexStorage2D(GL_TEXTURE_2D,1,GL_RGBA8, Window_width,Window_height);
+  // this implies that there is not mip mapping
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+
+  // Texure for computing the depth
+  GLuint Depth_texture;
+  glGenTextures(1,&Depth_texture);
+  glBindTexture(GL_TEXTURE_2D,Depth_texture);
+  // Float
+  glTexStorage2D(GL_TEXTURE_2D,1,GL_DEPTH_COMPONENT24, Window_width,Window_height);
+
+  // Attatchment of the textures to the FBO
+  glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,Color_texture,0);
+  glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,Depth_texture,0);
+
+  // OpenGL will draw to these buffers (only one in this case)
+  static const GLenum Draw_buffers[]={GL_COLOR_ATTACHMENT0};
+  glDrawBuffers(1,Draw_buffers);
+
+  /*************************/
+
+  // dibujar escena para seleccion
+
+  /*************************/
+
+  // get the pixel
+  int Color;
+  glReadBuffer(GL_FRONT);
+  glPixelStorei(GL_PACK_ALIGNMENT,1);
+  glReadPixels(Selection_position_x,Selection_position_y,1,1,GL_RGBA,GL_UNSIGNED_BYTE,&Color);
+
+  /*************************/
+
+  // convertir de RGB a identificador
+
+  // actualizar el identificador de la parte seleccionada en el objeto
+
+  /*************************/
+
+
+
+  glDeleteTextures(1,&Color_texture);
+  glDeleteTextures(1,&Depth_texture);
+  glDeleteFramebuffers(1,&FBO);
+  // the normal framebuffer takes the control of drawing
+  glBindFramebuffer(GL_DRAW_FRAMEBUFFER,defaultFramebufferObject());
 }

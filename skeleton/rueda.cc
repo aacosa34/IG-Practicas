@@ -42,14 +42,14 @@ void _rueda::draw_chess(){
 }
 
 void _rueda::draw_flat_shaded_lighting(){
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glRotatef(90,0,0,1);
     glScalef(0.75,1,0.75);
     (*Rueda).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 }
 
 void _rueda::draw_smooth_shaded_lighting(){

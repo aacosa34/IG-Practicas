@@ -10,7 +10,8 @@
 #ifndef GLWIDGET_H
 #define GLWIDGET_H
 
-#include <GL/gl.h>
+
+#include <GL/glew.h>
 #include <QOpenGLWidget>
 #include <QKeyEvent>
 #include <QImage>
@@ -38,12 +39,16 @@ namespace _gl_widget_ne {
   const float Y_MAX=.1;
   const float FRONT_PLANE_PERSPECTIVE=(X_MAX-X_MIN)/2;
   const float BACK_PLANE_PERSPECTIVE=1000;
+  const float FRONT_PLANE_PARALLEL=(X_MAX-X_MIN)/2;
+  const float BACK_PLANE_PARALLEL=1000;
   const float DEFAULT_DISTANCE=2;
   const float ANGLE_STEP=1;
+  const float ZOOM_VALUE=1.1;
 
   typedef enum {MODE_DRAW_POINT,MODE_DRAW_LINE,MODE_DRAW_FILL} _mode_draw;
   typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE,OBJECT_CONE,OBJECT_CYLINDER,OBJECT_SPHERE,OBJECT_PLY, OBJECT_HIERARCHICAL,OBJECT_DASHBOARD} _object;
   typedef enum {SOLID_MODE,CHESS_MODE,FLAT_SHADED_LIGHTING,SMOOTH_SHADED_LIGHTING,TEXTURE,TEXTURE_FLAT_SHADING,SMOOTH_TEXTURE_SHADED_LIGHTING} _render_mode;
+  typedef enum {PERSPECTIVE_PROJECTION, PARALLEL_PROJECTION} _projection;
 }
 
 class _window;
@@ -74,12 +79,19 @@ public:
   void set_materiales();
   void siguiente_material();
 
+  void pick();
+
 
 protected:
   void resizeGL(int Width1, int Height1) Q_DECL_OVERRIDE;
   void paintGL() Q_DECL_OVERRIDE;
   void initializeGL() Q_DECL_OVERRIDE;
   void keyPressEvent(QKeyEvent *Keyevent) Q_DECL_OVERRIDE;
+  void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+  void mouseReleaseEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+  void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+  void wheelEvent(QWheelEvent *event) Q_DECL_OVERRIDE;
+
 
 protected slots:
   void tick();
@@ -143,9 +155,24 @@ private:
 
   materiales material_activo = materiales::EMERALD;
 
+  _gl_widget_ne::_projection Proyeccion;
+
   float Observer_angle_x;
   float Observer_angle_y;
   float Observer_distance;
+
+  int Selection_position_x;
+  int Selection_position_y;
+
+  int Window_width;
+  int Window_height;
+
+  int ultima_pos_x;
+  int ultima_pos_y;
+
+  int factor_escalado;
+
+  GLuint textura;
 
 };
 
