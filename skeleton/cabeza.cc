@@ -114,22 +114,22 @@ void _cabeza::draw_chess(){
 }
 
 void _cabeza::draw_flat_shaded_lighting(){
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glScalef(4,0.5,5);
     (*Cubo).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1,1.75,0);
     glScalef(2,3,5);
     (*Cubo).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
     // Brazo completo
     // Dentro de Brazo estan por separado cada una de sus partes
@@ -146,22 +146,22 @@ void _cabeza::draw_flat_shaded_lighting(){
 
 
 void _cabeza::draw_smooth_shaded_lighting(){
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glScalef(4,0.5,5);
     (*Cubo).draw_smooth_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(1,1.75,0);
     glScalef(2,3,5);
     (*Cubo).draw_smooth_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
     // Brazo completo
     // Dentro de Brazo estan por separado cada una de sus partes

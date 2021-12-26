@@ -101,7 +101,7 @@ void _eje_ruedas::draw_flat_shaded_lighting(){
     Rueda->draw_flat_shaded_lighting();
     glPopMatrix();
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0.375,0);
@@ -109,7 +109,7 @@ void _eje_ruedas::draw_flat_shaded_lighting(){
     glScalef(0.1,2,0.1);
     (*Eje).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -125,7 +125,7 @@ void _eje_ruedas::draw_smooth_shaded_lighting(){
     Rueda->draw_smooth_shaded_lighting();
     glPopMatrix();
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0.375,0);
@@ -133,7 +133,7 @@ void _eje_ruedas::draw_smooth_shaded_lighting(){
     glScalef(0.1,2,0.1);
     (*Eje).draw_smooth_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();

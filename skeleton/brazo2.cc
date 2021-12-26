@@ -74,16 +74,16 @@ void _brazo2::draw_chess(){
 }
 
 void _brazo2::draw_flat_shaded_lighting(){
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glRotatef(90,0,0,1);
     glScalef(1.5,1,1.5);
     (*Cilindro).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,2.75);
@@ -91,20 +91,20 @@ void _brazo2::draw_flat_shaded_lighting(){
     glScalef(1,4,1);
     (*Cilindro).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 }
 
 void _brazo2::draw_smooth_shaded_lighting(){
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glRotatef(90,0,0,1);
     glScalef(1.5,1,1.5);
     (*Cilindro).draw_smooth_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glTranslatef(0,0,2.75);
@@ -112,5 +112,5 @@ void _brazo2::draw_smooth_shaded_lighting(){
     glScalef(1,4,1);
     (*Cilindro).draw_smooth_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 }

@@ -116,7 +116,7 @@ void _modelo::draw_flat_shaded_lighting(){
     Cadena->draw_flat_shaded_lighting();
     glPopMatrix();
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     // Base de la excavadora
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -124,7 +124,7 @@ void _modelo::draw_flat_shaded_lighting(){
     glScalef(4,0.5,5);
     (*Cubo).draw_flat_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
     // Cabeza o cabina de la excavadora
     // Esta parte va a girar en el eje y sobre la base
@@ -143,7 +143,7 @@ void _modelo::draw_smooth_shaded_lighting(){
     Cadena->draw_smooth_shaded_lighting();
     glPopMatrix();
 
-    glEnable(GL_RESCALE_NORMAL);
+    glEnable(GL_NORMALIZE);
     // Base de la excavadora
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -151,7 +151,7 @@ void _modelo::draw_smooth_shaded_lighting(){
     glScalef(4,0.5,5);
     (*Cubo).draw_smooth_shaded_lighting();
     glPopMatrix();
-    glDisable(GL_RESCALE_NORMAL);
+    glDisable(GL_NORMALIZE);
 
     // Cabeza o cabina de la excavadora
     // Esta parte va a girar en el eje y sobre la base
