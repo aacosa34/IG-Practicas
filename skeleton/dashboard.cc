@@ -27,10 +27,10 @@ _dashboard::_dashboard(float Size, unsigned int divisiones)
     }
 }
 
-void _dashboard::draw_texture(){
+void _dashboard::draw_texture(GLuint textura){
 
     glEnable(GL_TEXTURE_2D);
-    //glBindTexture();
+    glBindTexture(GL_TEXTURE_2D, textura);
 
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 
@@ -49,33 +49,56 @@ void _dashboard::draw_texture(){
 
 }
 
-void _dashboard::draw_texture_flat_shading_lighting(){
+void _dashboard::draw_texture_flat_shading_lighting(GLuint textura){
     calculo_normales_caras();
     calculo_normales_vertices();
 
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_TEXTURE_GEN_S);
-    glEnable(GL_TEXTURE_GEN_T);
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-    draw_flat_shaded_lighting();
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
+    glBindTexture(GL_TEXTURE_2D, textura);
+
+    glShadeModel(GL_FLAT);
+
+    glBegin(GL_TRIANGLES);
+    for (unsigned int i = 0; i<Triangles.size(); i++){
+        glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._0]);
+        glTexCoord2f(Coordenadas_textura[Triangles[i]._0]._0,Coordenadas_textura[Triangles[i]._0]._1);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]);
+
+        glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._1]);
+        glTexCoord2f(Coordenadas_textura[Triangles[i]._1]._0,Coordenadas_textura[Triangles[i]._1]._1);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]);
+
+        glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._2]);
+        glTexCoord2f(Coordenadas_textura[Triangles[i]._2]._0,Coordenadas_textura[Triangles[i]._2]._1);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._2]);
+    }
+    glEnd();
     glDisable(GL_TEXTURE_2D);
 }
 
-void _dashboard::draw_texture_smooth_shading_lighting(){
+void _dashboard::draw_texture_smooth_shading_lighting(GLuint textura){
     calculo_normales_caras();
     calculo_normales_vertices();
 
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_TEXTURE_GEN_S);
-    glEnable(GL_TEXTURE_GEN_T);
-    glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, textura);
+
     glShadeModel(GL_SMOOTH);
-    draw_smooth_shaded_lighting();
-    glDisable(GL_TEXTURE_GEN_S);
-    glDisable(GL_TEXTURE_GEN_T);
+
+    glBegin(GL_TRIANGLES);
+    for (unsigned int i = 0; i<Triangles.size(); i++){
+        glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._0]);
+        glTexCoord2f(Coordenadas_textura[Triangles[i]._0]._0,Coordenadas_textura[Triangles[i]._0]._1);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]);
+
+        glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._1]);
+        glTexCoord2f(Coordenadas_textura[Triangles[i]._1]._0,Coordenadas_textura[Triangles[i]._1]._1);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]);
+
+        glNormal3fv((GLfloat *) &Vertices_normales[Triangles[i]._2]);
+        glTexCoord2f(Coordenadas_textura[Triangles[i]._2]._0,Coordenadas_textura[Triangles[i]._2]._1);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._2]);
+    }
+    glEnd();
     glDisable(GL_TEXTURE_2D);
 }

@@ -37,10 +37,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = esqueleto_qt1.0.0
-DISTDIR = /home/adrian/Documents/IG-Practicas/build-esqueleto_qt-Desktop-Debug/.tmp/esqueleto_qt1.0.0
+DISTDIR = /home/adrian/Documentos/IG-Practicas/build-esqueleto_qt-Desktop-Debug/.tmp/esqueleto_qt1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lGLEW /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -114,7 +114,11 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/g++-base.conf \
 		/usr/lib/qt/mkspecs/common/g++-unix.conf \
 		/usr/lib/qt/mkspecs/qconfig.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Attica.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Baloo.pri \
+		/usr/lib/qt/mkspecs/modules/qt_BluezQt.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KActivities.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KActivitiesStats.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KArchive.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KAuth.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KAuthCore.pri \
@@ -125,30 +129,52 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_KConfigCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KConfigGui.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KConfigWidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KContacts.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KCoreAddons.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KCrash.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KDBusAddons.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KDeclarative.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDESu.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDNSSD.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDSoapClient.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDSoapServer.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KEmoticons.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KFileMetaData.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KGlobalAccel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KGuiAddons.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KHolidays.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KHtml.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KI18n.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIconThemes.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KIdleTime.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOFileWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOGui.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_Kirigami2.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KItemModels.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KItemViews.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KJobWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KJS.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KJSApi.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KNewStuff.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KNewStuffCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KNotifications.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KNotifyConfig.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KNTLM.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KParts.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KPeople.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KPeopleWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KPty.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KRunner.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KScreen.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KService.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KSyntaxHighlighting.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KTextEditor.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KTextWidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KUnitConversion.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KUserFeedbackCore.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KUserFeedbackWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KWallet.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KWaylandClient.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KWaylandServer.pri \
@@ -179,6 +205,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_gui_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_help_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
@@ -219,16 +246,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quick.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3d.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3d_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dassetimport.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3drender.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3drender_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3druntimerender.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dutils.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dutils_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quick_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickcontrols2.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
@@ -238,8 +255,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_serialport.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_serialport_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_sensors.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_sensors_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_sql_private.pri \
@@ -253,6 +270,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_uiplugin.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_uitools_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri \
@@ -276,10 +295,12 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_xml_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_phonon4qt5.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Prison.pri \
 		/usr/lib/qt/mkspecs/modules/qt_QuickAddons.pri \
 		/usr/lib/qt/mkspecs/modules/qt_Solid.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetUi.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Syndication.pri \
 		/usr/lib/qt/mkspecs/modules/qt_ThreadWeaver.pri \
 		/usr/lib/qt/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
@@ -376,7 +397,11 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/common/g++-base.conf \
 		/usr/lib/qt/mkspecs/common/g++-unix.conf \
 		/usr/lib/qt/mkspecs/qconfig.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Attica.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Baloo.pri \
+		/usr/lib/qt/mkspecs/modules/qt_BluezQt.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KActivities.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KActivitiesStats.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KArchive.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KAuth.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KAuthCore.pri \
@@ -387,30 +412,52 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/modules/qt_KConfigCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KConfigGui.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KConfigWidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KContacts.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KCoreAddons.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KCrash.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KDBusAddons.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KDeclarative.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDESu.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDNSSD.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDSoapClient.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KDSoapServer.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KEmoticons.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KFileMetaData.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KGlobalAccel.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KGuiAddons.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KHolidays.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KHtml.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KI18n.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIconThemes.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KIdleTime.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOFileWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOGui.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KIOWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_Kirigami2.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KItemModels.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KItemViews.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KJobWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KJS.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KJSApi.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KNewStuff.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KNewStuffCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KNotifications.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KNotifyConfig.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KNTLM.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KParts.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KPeople.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KPeopleWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KPty.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KRunner.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KScreen.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KService.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KSyntaxHighlighting.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KTextEditor.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KTextWidgets.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KUnitConversion.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KUserFeedbackCore.pri \
+		/usr/lib/qt/mkspecs/modules/qt_KUserFeedbackWidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KWallet.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KWaylandClient.pri \
 		/usr/lib/qt/mkspecs/modules/qt_KWaylandServer.pri \
@@ -441,6 +488,7 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/modules/qt_lib_gui_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_help.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_help_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_input_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_kms_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri \
@@ -481,16 +529,6 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quick.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3d.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3d_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dassetimport.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dassetimport_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3drender.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3drender_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3druntimerender.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3druntimerender_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dutils.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_quick3dutils_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quick_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickcontrols2.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
@@ -500,8 +538,8 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickwidgets.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_quickwidgets_private.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_serialport.pri \
-		/usr/lib/qt/mkspecs/modules/qt_lib_serialport_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_sensors.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_sensors_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_sql_private.pri \
@@ -515,6 +553,8 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/modules/qt_lib_uiplugin.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_uitools.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_uitools_private.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri \
+		/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri \
@@ -538,10 +578,12 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 		/usr/lib/qt/mkspecs/modules/qt_lib_xml.pri \
 		/usr/lib/qt/mkspecs/modules/qt_lib_xml_private.pri \
 		/usr/lib/qt/mkspecs/modules/qt_phonon4qt5.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Prison.pri \
 		/usr/lib/qt/mkspecs/modules/qt_QuickAddons.pri \
 		/usr/lib/qt/mkspecs/modules/qt_Solid.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetCore.pri \
 		/usr/lib/qt/mkspecs/modules/qt_SonnetUi.pri \
+		/usr/lib/qt/mkspecs/modules/qt_Syndication.pri \
 		/usr/lib/qt/mkspecs/modules/qt_ThreadWeaver.pri \
 		/usr/lib/qt/mkspecs/features/qt_functions.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
@@ -579,7 +621,11 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/common/g++-base.conf:
 /usr/lib/qt/mkspecs/common/g++-unix.conf:
 /usr/lib/qt/mkspecs/qconfig.pri:
+/usr/lib/qt/mkspecs/modules/qt_Attica.pri:
+/usr/lib/qt/mkspecs/modules/qt_Baloo.pri:
+/usr/lib/qt/mkspecs/modules/qt_BluezQt.pri:
 /usr/lib/qt/mkspecs/modules/qt_KActivities.pri:
+/usr/lib/qt/mkspecs/modules/qt_KActivitiesStats.pri:
 /usr/lib/qt/mkspecs/modules/qt_KArchive.pri:
 /usr/lib/qt/mkspecs/modules/qt_KAuth.pri:
 /usr/lib/qt/mkspecs/modules/qt_KAuthCore.pri:
@@ -590,30 +636,52 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/modules/qt_KConfigCore.pri:
 /usr/lib/qt/mkspecs/modules/qt_KConfigGui.pri:
 /usr/lib/qt/mkspecs/modules/qt_KConfigWidgets.pri:
+/usr/lib/qt/mkspecs/modules/qt_KContacts.pri:
 /usr/lib/qt/mkspecs/modules/qt_KCoreAddons.pri:
 /usr/lib/qt/mkspecs/modules/qt_KCrash.pri:
 /usr/lib/qt/mkspecs/modules/qt_KDBusAddons.pri:
 /usr/lib/qt/mkspecs/modules/qt_KDeclarative.pri:
+/usr/lib/qt/mkspecs/modules/qt_KDESu.pri:
+/usr/lib/qt/mkspecs/modules/qt_KDNSSD.pri:
+/usr/lib/qt/mkspecs/modules/qt_KDSoapClient.pri:
+/usr/lib/qt/mkspecs/modules/qt_KDSoapServer.pri:
+/usr/lib/qt/mkspecs/modules/qt_KEmoticons.pri:
+/usr/lib/qt/mkspecs/modules/qt_KFileMetaData.pri:
 /usr/lib/qt/mkspecs/modules/qt_KGlobalAccel.pri:
 /usr/lib/qt/mkspecs/modules/qt_KGuiAddons.pri:
+/usr/lib/qt/mkspecs/modules/qt_KHolidays.pri:
+/usr/lib/qt/mkspecs/modules/qt_KHtml.pri:
 /usr/lib/qt/mkspecs/modules/qt_KI18n.pri:
 /usr/lib/qt/mkspecs/modules/qt_KIconThemes.pri:
+/usr/lib/qt/mkspecs/modules/qt_KIdleTime.pri:
 /usr/lib/qt/mkspecs/modules/qt_KIOCore.pri:
 /usr/lib/qt/mkspecs/modules/qt_KIOFileWidgets.pri:
 /usr/lib/qt/mkspecs/modules/qt_KIOGui.pri:
 /usr/lib/qt/mkspecs/modules/qt_KIOWidgets.pri:
 /usr/lib/qt/mkspecs/modules/qt_Kirigami2.pri:
+/usr/lib/qt/mkspecs/modules/qt_KItemModels.pri:
 /usr/lib/qt/mkspecs/modules/qt_KItemViews.pri:
 /usr/lib/qt/mkspecs/modules/qt_KJobWidgets.pri:
 /usr/lib/qt/mkspecs/modules/qt_KJS.pri:
 /usr/lib/qt/mkspecs/modules/qt_KJSApi.pri:
+/usr/lib/qt/mkspecs/modules/qt_KNewStuff.pri:
+/usr/lib/qt/mkspecs/modules/qt_KNewStuffCore.pri:
 /usr/lib/qt/mkspecs/modules/qt_KNotifications.pri:
+/usr/lib/qt/mkspecs/modules/qt_KNotifyConfig.pri:
 /usr/lib/qt/mkspecs/modules/qt_KNTLM.pri:
 /usr/lib/qt/mkspecs/modules/qt_KParts.pri:
+/usr/lib/qt/mkspecs/modules/qt_KPeople.pri:
+/usr/lib/qt/mkspecs/modules/qt_KPeopleWidgets.pri:
 /usr/lib/qt/mkspecs/modules/qt_KPty.pri:
+/usr/lib/qt/mkspecs/modules/qt_KRunner.pri:
+/usr/lib/qt/mkspecs/modules/qt_KScreen.pri:
 /usr/lib/qt/mkspecs/modules/qt_KService.pri:
 /usr/lib/qt/mkspecs/modules/qt_KSyntaxHighlighting.pri:
+/usr/lib/qt/mkspecs/modules/qt_KTextEditor.pri:
 /usr/lib/qt/mkspecs/modules/qt_KTextWidgets.pri:
+/usr/lib/qt/mkspecs/modules/qt_KUnitConversion.pri:
+/usr/lib/qt/mkspecs/modules/qt_KUserFeedbackCore.pri:
+/usr/lib/qt/mkspecs/modules/qt_KUserFeedbackWidgets.pri:
 /usr/lib/qt/mkspecs/modules/qt_KWallet.pri:
 /usr/lib/qt/mkspecs/modules/qt_KWaylandClient.pri:
 /usr/lib/qt/mkspecs/modules/qt_KWaylandServer.pri:
@@ -644,6 +712,7 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/modules/qt_lib_gui_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_help.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_help_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_input_support_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_kms_support_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri:
@@ -684,16 +753,6 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/modules/qt_lib_qmlworkerscript_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_quick.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3d.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3d_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3dassetimport.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3dassetimport_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3drender.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3drender_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3druntimerender.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3druntimerender_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3dutils.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_quick3dutils_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_quick_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_quickcontrols2.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_quickcontrols2_private.pri:
@@ -703,8 +762,8 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/modules/qt_lib_quicktemplates2_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_quickwidgets.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_quickwidgets_private.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_serialport.pri:
-/usr/lib/qt/mkspecs/modules/qt_lib_serialport_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_sensors.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_sensors_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_service_support_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_sql_private.pri:
@@ -718,6 +777,8 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/modules/qt_lib_uiplugin.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_uitools.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_uitools_private.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard.pri:
+/usr/lib/qt/mkspecs/modules/qt_lib_virtualkeyboard_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_vulkan_support_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_waylandclient.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_waylandclient_private.pri:
@@ -741,10 +802,12 @@ Makefile: ../skeleton/esqueleto_qt.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf 
 /usr/lib/qt/mkspecs/modules/qt_lib_xml.pri:
 /usr/lib/qt/mkspecs/modules/qt_lib_xml_private.pri:
 /usr/lib/qt/mkspecs/modules/qt_phonon4qt5.pri:
+/usr/lib/qt/mkspecs/modules/qt_Prison.pri:
 /usr/lib/qt/mkspecs/modules/qt_QuickAddons.pri:
 /usr/lib/qt/mkspecs/modules/qt_Solid.pri:
 /usr/lib/qt/mkspecs/modules/qt_SonnetCore.pri:
 /usr/lib/qt/mkspecs/modules/qt_SonnetUi.pri:
+/usr/lib/qt/mkspecs/modules/qt_Syndication.pri:
 /usr/lib/qt/mkspecs/modules/qt_ThreadWeaver.pri:
 /usr/lib/qt/mkspecs/features/qt_functions.prf:
 /usr/lib/qt/mkspecs/features/qt_config.prf:
@@ -824,6 +887,9 @@ compiler_moc_header_make_all: moc_glwidget.cpp moc_window.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_glwidget.cpp moc_window.cpp
 moc_glwidget.cpp: ../skeleton/glwidget.h \
+		../skeleton/GL/glew.h \
+		../skeleton/GL/glu.h \
+		../skeleton/GL/glu_mangle.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \
@@ -852,12 +918,12 @@ moc_glwidget.cpp: ../skeleton/glwidget.h \
 		../skeleton/dashboard.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/adrian/Documents/IG-Practicas/build-esqueleto_qt-Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/adrian/Documents/IG-Practicas/skeleton -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
+	/usr/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG-Practicas/build-esqueleto_qt-Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/adrian/Documentos/IG-Practicas/skeleton -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
 
 moc_window.cpp: ../skeleton/window.h \
 		moc_predefs.h \
 		/usr/bin/moc
-	/usr/bin/moc $(DEFINES) --include /home/adrian/Documents/IG-Practicas/build-esqueleto_qt-Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/adrian/Documents/IG-Practicas/skeleton -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../skeleton/window.h -o moc_window.cpp
+	/usr/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG-Practicas/build-esqueleto_qt-Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/adrian/Documentos/IG-Practicas/skeleton -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../skeleton/window.h -o moc_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1140,6 +1206,9 @@ main.o: ../skeleton/main.cc ../skeleton/window.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../skeleton/main.cc
 
 glwidget.o: ../skeleton/glwidget.cc ../skeleton/glwidget.h \
+		../skeleton/GL/glew.h \
+		../skeleton/GL/glu.h \
+		../skeleton/GL/glu_mangle.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \
@@ -1171,6 +1240,9 @@ glwidget.o: ../skeleton/glwidget.cc ../skeleton/glwidget.h \
 
 window.o: ../skeleton/window.cc ../skeleton/window.h \
 		../skeleton/glwidget.h \
+		../skeleton/GL/glew.h \
+		../skeleton/GL/glu.h \
+		../skeleton/GL/glu_mangle.h \
 		../skeleton/GL/gl.h \
 		../skeleton/GL/gl_mangle.h \
 		../skeleton/GL/glext.h \

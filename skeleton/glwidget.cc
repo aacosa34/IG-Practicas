@@ -330,7 +330,7 @@ void _gl_widget::draw_objects()
         }
 
         case TEXTURE:
-            Dashboard.draw_texture();break;
+            Dashboard.draw_texture(textura);break;
         break;
 
         case TEXTURE_FLAT_SHADING:
@@ -344,7 +344,7 @@ void _gl_widget::draw_objects()
 
             glEnable(GL_LIGHTING);
 
-            Dashboard.draw_texture_flat_shading_lighting();
+            Dashboard.draw_texture_flat_shading_lighting(textura);
 
             glDisable(GL_LIGHTING);
 
@@ -362,7 +362,7 @@ void _gl_widget::draw_objects()
 
             glEnable(GL_LIGHTING);
 
-            Dashboard.draw_texture_smooth_shading_lighting();
+            Dashboard.draw_texture_smooth_shading_lighting(textura);
 
             glDisable(GL_LIGHTING);
         }
@@ -465,7 +465,7 @@ void _gl_widget::initializeGL()
   luz1_activa=false;
 
   // Code for reading an image
-  QString File_name("/home/adrianas/Documentos/IG-Practicas/skeleton/texturas/dia_8192.jpg");
+  QString File_name("/home/adrian/Documentos/IG-Practicas/skeleton/texturas/dia_8192.jpg");
   QImage Image;
   QImageReader Reader(File_name);
   Reader.setAutoTransform(true);
