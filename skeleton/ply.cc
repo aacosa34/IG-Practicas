@@ -1,6 +1,6 @@
 #include "ply.h"
 
-_ply::_ply(const string &File_name)
+void _ply::init(const string &File_name)
 {
     int abierto=archivo.open(File_name);
 

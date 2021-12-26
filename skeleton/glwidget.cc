@@ -46,6 +46,7 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_6:Object=OBJECT_PLY;break;
   case Qt::Key_7:Object=OBJECT_HIERARCHICAL;break;
   case Qt::Key_8:Object=OBJECT_DASHBOARD;break;
+  case Qt::Key_9:Object=OBJECT_PLYMATRIX;break;
 
   case Qt::Key_P:Draw_point=!Draw_point;break;
   case Qt::Key_L:Draw_line=!Draw_line;break;
@@ -91,61 +92,93 @@ void _gl_widget::keyPressEvent(QKeyEvent *Keyevent)
   case Qt::Key_Right:Observer_angle_y+=ANGLE_STEP;break;
   case Qt::Key_Up:Observer_angle_x-=ANGLE_STEP;break;
   case Qt::Key_Down:Observer_angle_x+=ANGLE_STEP;break;
-  case Qt::Key_PageUp:Observer_distance*=ZOOM_VALUE;break;
-  case Qt::Key_PageDown:Observer_distance/=ZOOM_VALUE;break;
+  case Qt::Key_PageUp:{
+      if(Proyeccion==PERSPECTIVE_PROJECTION){
+          Observer_distance*=ZOOM_FACTOR;
+      }
+      else if(Proyeccion==PARALLEL_PROJECTION){
+        zoom+=ZOOM_FACTOR;
+      }
+  }break;
+  case Qt::Key_PageDown:{
+      if(Proyeccion==PERSPECTIVE_PROJECTION){
+        Observer_distance/=ZOOM_FACTOR;
+      }
+      else if(Proyeccion==PARALLEL_PROJECTION){
+        zoom/=ZOOM_FACTOR;
+      }
+  }break;
+
   }
 
   update();
 }
 
-void _gl_widget::mousePressEvent(QMouseEvent *event){
-    if(event->buttons() & Qt::RightButton) {
-        Selection_position_x = event->x();
-        Selection_position_y = height() - event->y();
+void _gl_widget::mousePressEvent(QMouseEvent *event)
+{
+    //  If right-clicked: Select triangles.
+    if(event->buttons() & Qt::RightButton)
+    {
+        Window_width = this->width();
+        Window_height = this->height();
+
+        Selection_position_x = (event->x());
+        Selection_position_y = (Window_height - event->y());
+        this->pick();
     }
+
+    //  If left-clicked: Move the camera.
+    if(event->buttons() & Qt::LeftButton)
+    {
+        ultima_pos_x = event->x();
+        ultima_pos_y = event->y();
+        arrastre = true;
+    }
+    update();
 }
 
-void _gl_widget::mouseReleaseEvent(QMouseEvent *event){
-    if(event->button() & Qt::RightButton){
-        pick();
-        update();
+void _gl_widget::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        arrastre = false;
     }
+    update();
 }
 
-void _gl_widget::mouseMoveEvent(QMouseEvent *event){
-    int pos_x = event->x();
-    int pos_y = event->y();
-
-    if(event->buttons() & Qt::LeftButton){
-        if(ultima_pos_x < pos_x)
-            Observer_angle_y+=ANGLE_STEP;
-        else if(ultima_pos_x > pos_x)
-            Observer_angle_y-=ANGLE_STEP;
-
-        if(ultima_pos_y < pos_y)
-            Observer_angle_x+=ANGLE_STEP;
-        else if(ultima_pos_y > pos_y)
-            Observer_angle_x-=ANGLE_STEP;
-
-        ultima_pos_x = pos_x;
-        ultima_pos_y = pos_y;
-
+void _gl_widget::mouseMoveEvent(QMouseEvent *event)
+{
+    if(arrastre)
+    {
+        Observer_angle_x += (event->y() - ultima_pos_y) * 0.05;
+        Observer_angle_y += (event->x() - ultima_pos_x) * 0.05;
     }
     update();
 }
 
 
-void _gl_widget::wheelEvent(QWheelEvent *event){
-   int grados = event->delta();
-   int pasos = grados/15;
+void _gl_widget::wheelEvent(QWheelEvent *event)
+{
+    const int grados = event->delta() / 8;
+    int pasos = grados/15;
 
-   if(grados > 0)
-       Observer_distance /= pasos*ZOOM_VALUE;
-   else if (grados < 0)
-       Observer_distance *= abs(pasos*ZOOM_VALUE);
-
-   event->accept();
-   update();
+    if(Proyeccion==PERSPECTIVE_PROJECTION){
+        if(grados > 0){
+            Observer_distance /= pasos*ZOOM_FACTOR;
+        }
+        else if (grados < 0){
+            Observer_distance *= abs(pasos*ZOOM_FACTOR);
+        }
+    }
+    else if (Proyeccion==PARALLEL_PROJECTION){
+        if(grados > 0){
+            zoom /= pasos*ZOOM_FACTOR;
+        }
+        else if(grados < 0){
+            zoom += abs(pasos*ZOOM_FACTOR);
+        }
+    }
+    update();
 }
 
 /*****************************************************************************//**
@@ -174,14 +207,12 @@ void _gl_widget::change_projection()
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  float relacion_aspecto = (float)Window_height/(float)Window_width;
-
   if(Proyeccion==PERSPECTIVE_PROJECTION)
       // formato(x_minimo,x_maximo, y_minimo, y_maximo,Front_plane, plano_traser)
       // Front_plane>0  Back_plane>PlanoDelantero)
       glFrustum(X_MIN,X_MAX,Y_MIN,Y_MAX,FRONT_PLANE_PERSPECTIVE,BACK_PLANE_PERSPECTIVE);
   else if (Proyeccion==PARALLEL_PROJECTION){
-      glOrtho(X_MIN*factor_escalado,X_MAX*factor_escalado,Y_MIN*relacion_aspecto*factor_escalado,Y_MAX*relacion_aspecto*factor_escalado,FRONT_PLANE_PARALLEL,BACK_PLANE_PARALLEL);
+      glOrtho(X_MIN_PAR*zoom,X_MAX_PAR*zoom,Y_MIN_PAR*zoom,Y_MAX_PAR*zoom,FRONT_PLANE_PARALLEL,BACK_PLANE_PARALLEL);
   }
 }
 
@@ -228,6 +259,7 @@ void _gl_widget::draw_objects()
     case OBJECT_PLY:Ply.draw_point();break;
     case OBJECT_HIERARCHICAL:Modelo.draw_point();break;
     case OBJECT_DASHBOARD:Dashboard.draw_point();break;
+    case OBJECT_PLYMATRIX:Matrix.draw();break;
     default:break;
     }
   }
@@ -244,6 +276,7 @@ void _gl_widget::draw_objects()
     case OBJECT_PLY:Ply.draw_line();break;
     case OBJECT_HIERARCHICAL:Modelo.draw_line();break;
     case OBJECT_DASHBOARD:Dashboard.draw_line();break;
+    case OBJECT_PLYMATRIX:Matrix.draw();break;
     default:break;
     }
   }
@@ -260,6 +293,7 @@ void _gl_widget::draw_objects()
                 case OBJECT_PLY:Ply.draw_fill();break;
                 case OBJECT_HIERARCHICAL:Modelo.draw_fill();break;
                 case OBJECT_DASHBOARD:Dashboard.draw_fill();break;
+                case OBJECT_PLYMATRIX:Matrix.draw();break;
                 default:break;
                 }
         break;
@@ -274,6 +308,7 @@ void _gl_widget::draw_objects()
             case OBJECT_PLY:Ply.draw_chess();break;
             case OBJECT_HIERARCHICAL:Modelo.draw_chess();break;
             case OBJECT_DASHBOARD:Dashboard.draw_chess();break;
+            case OBJECT_PLYMATRIX:Matrix.draw();break;
             default:break;
             }
         break;
@@ -297,6 +332,7 @@ void _gl_widget::draw_objects()
             case OBJECT_PLY:Ply.draw_flat_shaded_lighting();break;
             case OBJECT_HIERARCHICAL:Modelo.draw_flat_shaded_lighting();break;
             case OBJECT_DASHBOARD:Dashboard.draw_flat_shaded_lighting();break;
+            case OBJECT_PLYMATRIX:Matrix.draw();break;
             default:break;
             }
         glDisable(GL_LIGHTING);
@@ -323,6 +359,8 @@ void _gl_widget::draw_objects()
             case OBJECT_PLY:Ply.draw_smooth_shaded_lighting();break;
             case OBJECT_HIERARCHICAL:Modelo.draw_smooth_shaded_lighting();break;
             case OBJECT_DASHBOARD:Dashboard.draw_smooth_shaded_lighting();break;
+            case OBJECT_PLYMATRIX:Matrix.draw();break;
+
             default:break;
         glDisable(GL_LIGHTING);
         }
@@ -490,7 +528,10 @@ void _gl_widget::initializeGL()
   // Code to pass the image to OpenGL to form a texture 2D
   glTexImage2D(GL_TEXTURE_2D,0,3,Image.width(),Image.height(),0,GL_RGB,GL_UNSIGNED_BYTE,Image.bits());
 
-  factor_escalado = 5;
+  zoom = 5;
+  arrastre = false;
+
+  Ply.init("../ply_models/beethoven.ply");
 }
 
 void _gl_widget::animacion(){
@@ -692,6 +733,22 @@ void _gl_widget::pick()
   // dibujar escena para seleccion
 
   /*************************/
+  clear_window();
+  change_projection();
+  change_observer();
+
+  switch(Object){
+      case OBJECT_TETRAHEDRON:Tetrahedron.draw_selection();break;
+      case OBJECT_CUBE:Cube.draw_selection();break;
+      case OBJECT_CONE:Cone.draw_selection();break;
+      case OBJECT_CYLINDER:Cylinder.draw_selection();break;
+      case OBJECT_SPHERE:Sphere.draw_selection();break;
+      case OBJECT_PLY:Ply.draw_selection();break;
+      //case OBJECT_HIERARCHICAL:Modelo.draw_selection();break;
+      case OBJECT_DASHBOARD:Dashboard.draw_selection();break;
+      case OBJECT_PLYMATRIX:Matrix.draw(2);break;
+      default:break;
+  }
 
   // get the pixel
   int Color;
@@ -707,7 +764,26 @@ void _gl_widget::pick()
 
   /*************************/
 
+  int selTriangle;
+  uint B = (uint)((Color & 0x00FF0000) >> 16);
+  uint G = (uint)((Color & 0x0000FF00) >> 8);
+  uint R = (uint)(Color & 0x000000FF);
 
+  selTriangle = (R << 16) + (G << 8) + B;
+  cout << "Triangulo numero: " << selTriangle << endl;
+
+  switch(Object){
+      case OBJECT_TETRAHEDRON:Tetrahedron.selected_triangle(selTriangle);break;
+      case OBJECT_CUBE:Cube.selected_triangle(selTriangle);break;
+      case OBJECT_CONE:Cone.selected_triangle(selTriangle);break;
+      case OBJECT_CYLINDER:Cylinder.selected_triangle(selTriangle);break;
+      case OBJECT_SPHERE:Sphere.selected_triangle(selTriangle);break;
+      case OBJECT_PLY:Ply.selected_triangle(selTriangle);break;
+      //case OBJECT_HIERARCHICAL:Modelo.selected_triangle(selTriangle);break;
+      case OBJECT_DASHBOARD:Dashboard.selected_triangle(selTriangle);break;
+      case OBJECT_PLYMATRIX:Matrix.selected_object(selTriangle);break;
+      default:break;
+  }
 
   glDeleteTextures(1,&Color_texture);
   glDeleteTextures(1,&Depth_texture);

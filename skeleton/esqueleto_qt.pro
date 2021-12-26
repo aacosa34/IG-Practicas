@@ -18,6 +18,7 @@ HEADERS += \
   objectrev.h \
   pala.h \
   ply.h \
+  ply_matrix.h \
   revply.h \
   rueda.h \
   sphere.h \
@@ -45,6 +46,7 @@ SOURCES += \
   objectrev.cc \
   pala.cc \
   ply.cc \
+  ply_matrix.cc \
   revply.cc \
   rueda.cc \
   sphere.cc \

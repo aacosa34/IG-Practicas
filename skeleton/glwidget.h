@@ -29,6 +29,7 @@
 #include "ply.h"
 #include "modelo.h"
 #include "dashboard.h"
+#include "ply_matrix.h"
 
 
 namespace _gl_widget_ne {
@@ -37,16 +38,20 @@ namespace _gl_widget_ne {
   const float X_MAX=.1;
   const float Y_MIN=-.1;
   const float Y_MAX=.1;
+  const float X_MIN_PAR=-1.0;
+  const float X_MAX_PAR=1.0;
+  const float Y_MIN_PAR=-1.0;
+  const float Y_MAX_PAR=1.0;
   const float FRONT_PLANE_PERSPECTIVE=(X_MAX-X_MIN)/2;
   const float BACK_PLANE_PERSPECTIVE=1000;
-  const float FRONT_PLANE_PARALLEL=(X_MAX-X_MIN)/2;
-  const float BACK_PLANE_PARALLEL=1000;
+  const float FRONT_PLANE_PARALLEL=-5000;
+  const float BACK_PLANE_PARALLEL=5000;
   const float DEFAULT_DISTANCE=2;
   const float ANGLE_STEP=1;
-  const float ZOOM_VALUE=1.1;
+  const float ZOOM_FACTOR=1.1;
 
   typedef enum {MODE_DRAW_POINT,MODE_DRAW_LINE,MODE_DRAW_FILL} _mode_draw;
-  typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE,OBJECT_CONE,OBJECT_CYLINDER,OBJECT_SPHERE,OBJECT_PLY, OBJECT_HIERARCHICAL,OBJECT_DASHBOARD} _object;
+  typedef enum {OBJECT_TETRAHEDRON,OBJECT_CUBE,OBJECT_CONE,OBJECT_CYLINDER,OBJECT_SPHERE,OBJECT_PLY, OBJECT_HIERARCHICAL,OBJECT_DASHBOARD,OBJECT_PLYMATRIX} _object;
   typedef enum {SOLID_MODE,CHESS_MODE,FLAT_SHADED_LIGHTING,SMOOTH_SHADED_LIGHTING,TEXTURE,TEXTURE_FLAT_SHADING,SMOOTH_TEXTURE_SHADED_LIGHTING} _render_mode;
   typedef enum {PERSPECTIVE_PROJECTION, PARALLEL_PROJECTION} _projection;
 }
@@ -107,6 +112,7 @@ private:
   _cone Cone;
   _sphere Sphere;
   _ply Ply;
+  _ply_matrix Matrix;
 
   // Para la parte de las ruedas de la excavadora
   _rueda Rueda = _rueda(Cylinder);
@@ -164,13 +170,15 @@ private:
   int Selection_position_x;
   int Selection_position_y;
 
+  bool arrastre;
+
   int Window_width;
   int Window_height;
 
   int ultima_pos_x;
   int ultima_pos_y;
 
-  int factor_escalado;
+  int zoom;
 
   GLuint textura;
 

@@ -41,11 +41,14 @@ void _object3D::draw_line()
 
 void _object3D::draw_fill()
 {
-    glColor3f(1.0f, 0.5f, 0.0f); // Naranja
-
     glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); // Rellenamos ambas caras del poligono
     glBegin(GL_TRIANGLES); // Pintamos con triangulos
     for (unsigned int i=0;i<Triangles.size();i++){
+        if(triangulo_seleccionado==(int)i)
+            glColor3f(0.0f,0.0f,1.0f); // El triangulo seleccionado se pinta de azul
+        else
+            glColor3f(1.0f, 0.0f, 0.0f); // Naranja
+
         glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]); // Primera componente del triangulo
         glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]); // Segunda componente del triangulo
         glVertex3fv((GLfloat *) &Vertices[Triangles[i]._2]); // Tercera componente del triangulo
@@ -58,7 +61,7 @@ void _object3D::draw_fill()
  *
  *
  *
- *****************************************************************************/
+ ************   *****************************************************************/
 
 void _object3D::draw_chess()
 {
@@ -180,3 +183,27 @@ void _object3D::calculo_normales_vertices(){
 }
 
 
+void _object3D::draw_selection(){
+    float r, g, b;
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    glBegin(GL_TRIANGLES);
+    for(unsigned int i=0; i<Triangles.size(); i++){
+        // Cada triangulo tendra un color distinto, por eso
+        // se hace un AND con su indice
+        r = (i & 0x00FF0000) >> 16;
+        g = (i & 0x0000FF00) >> 8;
+        b = (i & 0x000000FF);
+
+        glColor3f(r/255.0f, g/255.0f, b/255.0f);
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._0]); // Primera componente del triangulo
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._1]); // Segunda componente del triangulo
+        glVertex3fv((GLfloat *) &Vertices[Triangles[i]._2]); // Tercera componente del triangulo
+    }
+    glEnd();
+}
+
+void _object3D::selected_triangle(int triangulo){
+    triangulo_seleccionado=triangulo;
+}

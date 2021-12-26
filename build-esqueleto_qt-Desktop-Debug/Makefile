@@ -70,6 +70,7 @@ SOURCES       = ../skeleton/basic_object3d.cc \
 		../skeleton/objectrev.cc \
 		../skeleton/pala.cc \
 		../skeleton/ply.cc \
+		../skeleton/ply_matrix.cc \
 		../skeleton/revply.cc \
 		../skeleton/rueda.cc \
 		../skeleton/sphere.cc \
@@ -96,6 +97,7 @@ OBJECTS       = basic_object3d.o \
 		objectrev.o \
 		pala.o \
 		ply.o \
+		ply_matrix.o \
 		revply.o \
 		rueda.o \
 		sphere.o \
@@ -346,6 +348,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../skeleton/objectrev.h \
 		../skeleton/pala.h \
 		../skeleton/ply.h \
+		../skeleton/ply_matrix.h \
 		../skeleton/revply.h \
 		../skeleton/rueda.h \
 		../skeleton/sphere.h \
@@ -370,6 +373,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../skeleton/objectrev.cc \
 		../skeleton/pala.cc \
 		../skeleton/ply.cc \
+		../skeleton/ply_matrix.cc \
 		../skeleton/revply.cc \
 		../skeleton/rueda.cc \
 		../skeleton/sphere.cc \
@@ -850,8 +854,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../skeleton/brazo.h ../skeleton/brazo1.h ../skeleton/brazo2.h ../skeleton/cabeza.h ../skeleton/cadena.h ../skeleton/colors.h ../skeleton/basic_object3d.h ../skeleton/cone.h ../skeleton/cube.h ../skeleton/cylinder.h ../skeleton/dashboard.h ../skeleton/eje_ruedas.h ../skeleton/file_ply_stl.h ../skeleton/modelo.h ../skeleton/object3d.h ../skeleton/axis.h ../skeleton/objectrev.h ../skeleton/pala.h ../skeleton/ply.h ../skeleton/revply.h ../skeleton/rueda.h ../skeleton/sphere.h ../skeleton/tetrahedron.h ../skeleton/glwidget.h ../skeleton/window.h GL/*.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../skeleton/basic_object3d.cc ../skeleton/brazo.cc ../skeleton/brazo1.cc ../skeleton/brazo2.cc ../skeleton/cabeza.cc ../skeleton/cadena.cc ../skeleton/cone.cc ../skeleton/cube.cc ../skeleton/cylinder.cc ../skeleton/dashboard.cc ../skeleton/eje_ruedas.cc ../skeleton/file_ply_stl.cc ../skeleton/modelo.cc ../skeleton/object3d.cc ../skeleton/axis.cc ../skeleton/objectrev.cc ../skeleton/pala.cc ../skeleton/ply.cc ../skeleton/revply.cc ../skeleton/rueda.cc ../skeleton/sphere.cc ../skeleton/tetrahedron.cc ../skeleton/main.cc ../skeleton/glwidget.cc ../skeleton/window.cc $(DISTDIR)/
+	$(COPY_FILE) --parents ../skeleton/brazo.h ../skeleton/brazo1.h ../skeleton/brazo2.h ../skeleton/cabeza.h ../skeleton/cadena.h ../skeleton/colors.h ../skeleton/basic_object3d.h ../skeleton/cone.h ../skeleton/cube.h ../skeleton/cylinder.h ../skeleton/dashboard.h ../skeleton/eje_ruedas.h ../skeleton/file_ply_stl.h ../skeleton/modelo.h ../skeleton/object3d.h ../skeleton/axis.h ../skeleton/objectrev.h ../skeleton/pala.h ../skeleton/ply.h ../skeleton/ply_matrix.h ../skeleton/revply.h ../skeleton/rueda.h ../skeleton/sphere.h ../skeleton/tetrahedron.h ../skeleton/glwidget.h ../skeleton/window.h GL/*.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../skeleton/basic_object3d.cc ../skeleton/brazo.cc ../skeleton/brazo1.cc ../skeleton/brazo2.cc ../skeleton/cabeza.cc ../skeleton/cadena.cc ../skeleton/cone.cc ../skeleton/cube.cc ../skeleton/cylinder.cc ../skeleton/dashboard.cc ../skeleton/eje_ruedas.cc ../skeleton/file_ply_stl.cc ../skeleton/modelo.cc ../skeleton/object3d.cc ../skeleton/axis.cc ../skeleton/objectrev.cc ../skeleton/pala.cc ../skeleton/ply.cc ../skeleton/ply_matrix.cc ../skeleton/revply.cc ../skeleton/rueda.cc ../skeleton/sphere.cc ../skeleton/tetrahedron.cc ../skeleton/main.cc ../skeleton/glwidget.cc ../skeleton/window.cc $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -916,6 +920,7 @@ moc_glwidget.cpp: ../skeleton/glwidget.h \
 		../skeleton/eje_ruedas.h \
 		../skeleton/rueda.h \
 		../skeleton/dashboard.h \
+		../skeleton/ply_matrix.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/adrian/Documentos/IG-Practicas/build-esqueleto_qt-Desktop-Debug/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/adrian/Documentos/IG-Practicas/skeleton -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtCore -I. -I/usr/include/c++/11.1.0 -I/usr/include/c++/11.1.0/x86_64-pc-linux-gnu -I/usr/include/c++/11.1.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/include-fixed -I/usr/include ../skeleton/glwidget.h -o moc_glwidget.cpp
@@ -1157,6 +1162,18 @@ ply.o: ../skeleton/ply.cc ../skeleton/ply.h \
 		../skeleton/file_ply_stl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ply.o ../skeleton/ply.cc
 
+ply_matrix.o: ../skeleton/ply_matrix.cc ../skeleton/ply_matrix.h \
+		../skeleton/object3d.h \
+		../skeleton/basic_object3d.h \
+		../skeleton/GL/gl.h \
+		../skeleton/GL/gl_mangle.h \
+		../skeleton/GL/glext.h \
+		../skeleton/colors.h \
+		../skeleton/vertex.h \
+		../skeleton/ply.h \
+		../skeleton/file_ply_stl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ply_matrix.o ../skeleton/ply_matrix.cc
+
 revply.o: ../skeleton/revply.cc ../skeleton/revply.h \
 		../skeleton/objectrev.h \
 		../skeleton/object3d.h \
@@ -1235,6 +1252,7 @@ glwidget.o: ../skeleton/glwidget.cc ../skeleton/glwidget.h \
 		../skeleton/eje_ruedas.h \
 		../skeleton/rueda.h \
 		../skeleton/dashboard.h \
+		../skeleton/ply_matrix.h \
 		../skeleton/window.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o glwidget.o ../skeleton/glwidget.cc
 
@@ -1268,7 +1286,8 @@ window.o: ../skeleton/window.cc ../skeleton/window.h \
 		../skeleton/cadena.h \
 		../skeleton/eje_ruedas.h \
 		../skeleton/rueda.h \
-		../skeleton/dashboard.h
+		../skeleton/dashboard.h \
+		../skeleton/ply_matrix.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o window.o ../skeleton/window.cc
 
 moc_glwidget.o: moc_glwidget.cpp 
