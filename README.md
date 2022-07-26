@@ -1,2 +1,2 @@
-# IG-Practicas
-Prácticas de IG en QtCreator
+# IG Practicas
+Prácticas de la asignatura Informática Gráfica de la UGR en QtCreator
